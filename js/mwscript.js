@@ -1,6 +1,7 @@
 function updateSelection(str) {
   updateImage(str);
   updateFields(str);
+  updateContinueButton(str);
 }
 
 // Creates an HTML5 canvas and uses the Fabric.js library to place the selected product image on the canvas.
@@ -42,4 +43,18 @@ function updateFields(str) {
   }
   xmlhttp.open("GET","php/getProductFields.php?q="+str,true);
   xmlhttp.send();
+}
+
+// Changes the URL of the "Continue" button to match the selected product.
+function updateContinueButton(str) {
+  if (str=="") {
+    document.getElementById("submit-button-container").innerHTML="";
+    return;
+  }
+  else {
+    var url = "<button><a href='http://localhost:8080/HDS/testproduct";
+    url += str;
+    url += "'>Continue</a></button>";
+    document.getElementById("submit-button-container").innerHTML=url;
+  }
 }

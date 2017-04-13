@@ -8,6 +8,7 @@
 
 <!-- Bootstrap -->
 <link href="css/bootstrap.css" rel="stylesheet">
+<script src='lib/fabric.js-1.7.9/dist/fabric.js'></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,36 +28,6 @@
 <div class="container">
   <div class="row text-center">
     <div class="col-lg-4">
-      <h2>Select Product: </h2>
-      <form>
-      <select name="products" onchange="updateSelection(this.value)">
-      <option value="">Choose a Product Below...</option>
-      <?php
-        $servername = "127.0.0.1";
-        $username = "root";
-        $password = "";
-        $dbname = "hds_custom_products";
-
-        $conn = mysqli_connect($servername, $username, $password, $dbname);
-        if ($conn->connect_error) {
-          die("Connection failed: " . $conn->connect_error);
-        } 
-
-        $products = "SELECT * FROM product";
-        $result = $conn->query($products);
-
-        if ($result->num_rows > 0) {
-            $menu = "";
-            while($row = $result->fetch_assoc()) {
-              $menu .= '<option value="' . $row["id"] . '">' . $row["name"] . "</option>";
-            }
-        } else {
-            echo "0 results";
-        }
-        echo $menu;  
-      ?>
-      </select>
-      </form>
       <div id="productFields"></div>      
     </div>
     <div class="col-md-8">
@@ -68,7 +39,7 @@
   <div class="row">
     <div class="text-justify col-sm-4"> </div>
     <div class="col-sm-4 text-justify"> </div>
-    <div class="col-sm-4 text-justify" id="submit-button-container"></div>
+    <div class="col-sm-4 text-justify"> <button><a href="#">Submit</a></button></div>
   </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
