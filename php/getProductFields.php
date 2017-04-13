@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-
 <?php
 $servername = "127.0.0.1";
 $username = "root";
@@ -28,6 +22,3 @@ while($row = mysqli_fetch_array($result)) {
 }
 echo '</ul>';
 mysqli_close($conn);
-?>
-</body>
-</html>

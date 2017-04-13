@@ -27,12 +27,34 @@
 </div>
 <div class="container">
   <div class="row text-center">
-    <div class="col-lg-4">
-      <div id="productFields"></div>      
-    </div>
-    <div class="col-md-8">
+    <div class="col-lg-12">
+    <?php
+        $servername = "127.0.0.1";
+        $username = "root";
+        $password = "";
+        $dbname = "hds_custom_products";
+
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+        }
+    ?>
       <h2>Product Image:</h2>
-      <div id="productImage"></div>
+      <div id="productImage">
+        <canvas id="c"></canvas>
+        <img src="http://www.govgroup.com/scart/public/database/product/images_products/2199152_large.jpg" id="my-image">
+        <script>
+        var canvas = new fabric.Canvas('c');
+        var imgElement = document.getElementById('my-image');
+        var imgInstance = new fabric.Image(imgElement, {
+          left: 100,
+          top: 100,
+          angle: 30,
+          opacity: 0.85
+        });
+        canvas.add(imgInstance);
+        </script>
+      </div>
     </div>
   </div>
   <hr>

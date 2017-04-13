@@ -8,6 +8,7 @@
 
 <!-- Bootstrap -->
 <link href="css/bootstrap.css" rel="stylesheet">
+<script src='lib/fabric.js-1.7.9/dist/fabric.js'></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,7 +41,7 @@
         $conn = mysqli_connect($servername, $username, $password, $dbname);
         if ($conn->connect_error) {
           die("Connection failed: " . $conn->connect_error);
-        } 
+        }
 
         $products = "SELECT * FROM product";
         $result = $conn->query($products);
@@ -61,7 +62,9 @@
     </div>
     <div class="col-md-8">
       <h2>Product Image:</h2>
-      <div id="productImage"></div>
+      <div id="productImage">
+        <canvas id="c"></canvas>
+      </div>
     </div>
   </div>
   <hr>
