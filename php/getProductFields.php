@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<?php
+$servername = "127.0.0.1";
+$username = "root";
+$password = "";
+$dbname = "hds_custom_products";
+
+$q = intval($_GET['q']);
+
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+if (!$conn) {
+  die('Could not connect: ' . mysqli_error($conn));
+}
+
+mysqli_select_db($conn,"test");
+$sql="SELECT * FROM fieldheaders WHERE id = '".$q."'";
+$result = mysqli_query($conn,$sql);
+
+echo '<h2>Customizable Options:</h2>';
+echo '<ul>';
+while($row = mysqli_fetch_array($result)) {
+  echo '<li>' . $row['name'] . '</li>';
+}
+echo '</ul>';
+mysqli_close($conn);
+?>
+</body>
+</html>
