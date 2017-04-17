@@ -63,7 +63,7 @@
     <div class="col-md-8">
       <h2>Product Image:</h2>
       <div id="productImage">
-        <canvas id="c"></canvas>
+        <canvas id="c" width="800" height="600"></canvas>
       </div>
     </div>
   </div>
@@ -71,7 +71,9 @@
   <div class="row">
     <div class="text-justify col-sm-4"> </div>
     <div class="col-sm-4 text-justify"> </div>
-    <div class="col-sm-4 text-justify" id="submit-button-container"></div>
+    <div class="col-sm-4 text-justify" id="submit-button-container">
+      <button onclick="submitCanvas()">Continue</button>
+    </div>
   </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 

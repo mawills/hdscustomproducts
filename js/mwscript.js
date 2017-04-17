@@ -1,4 +1,7 @@
+var canvas = new fabric.Canvas('c');
+
 function updateSelection(str) {
+  canvas.clear();
   updateImage(str);
   updateFields(str);
 }
@@ -15,18 +18,15 @@ function updateImage(str) {
   } else {
     xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
   }
-  /*xmlhttp.onreadystatechange=function() {
-    if (this.readyState==4 && this.status==200) {
-      document.getElementById("productImage").innerHTML=this.responseText;
-    }
-  }*/
-
   xmlhttp.onreadystatechange=function() {
     if (this.readyState==4 && this.status==200) {
-      var canvas = new fabric.Canvas('c');
       fabric.Image.fromURL(this.responseText, function(oImg) {
         canvas.add(oImg);
+        canvas.sendToBack(oImg);
+        oImg.selectable = false;
       });
+      var text = new fabric.Text('hello world', { left: 200, top: 200 });
+      canvas.add(text);
     }
   }
 
@@ -52,4 +52,8 @@ function updateFields(str) {
   }
   xmlhttp.open("GET","php/getProductFields.php?q="+str,true);
   xmlhttp.send();
+}
+
+function submitCanvas() {
+  window.open("data:image/svg+xml;utf8," + canvas.toSVG());
 }
