@@ -72,7 +72,7 @@ function setupProductCanvas(str) {
       
     }
   }
-  xmlhttp.open("GET","php/get----------.php?q="+str,true);
+  xmlhttp.open("GET","php/setupProductCanvas.php?q="+str,true);
   xmlhttp.send();
 
   var name = new fabric.Textbox('Sample Name', 
