@@ -62,7 +62,7 @@
     </div>
     <div class="col-md-8">
       <h2>Product Image:</h2>
-      <div id="productImage">
+      <div id="productCanvasContainer">
         <canvas id="c" width="800" height="600"></canvas>
       </div>
     </div>
