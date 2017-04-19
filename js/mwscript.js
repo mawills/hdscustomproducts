@@ -2,6 +2,7 @@ var canvas = new fabric.Canvas('c');
 
 // Called when user submits design. Exports the content of the canvas to SVG format and displays it
 // TODO: Also stored in a user's "history" of designs
+// TODO: Also emails a copy of the SVG to an HDS employee
 function submitCanvas() {
   window.open("data:image/svg+xml;utf8," + canvas.toSVG());
 }
@@ -77,4 +78,14 @@ function setupProductCanvas(str) {
   }
   xmlhttp.open("GET","php/setupProductCanvas.php?q="+str,true);
   xmlhttp.send();
+}
+
+// Adds a new product to the database
+function saveNewProduct() {
+
+}
+
+// Updates the canvas when a user is editing a new product to add to the database
+function updateNewProduct() {
+  document.getElementById("newProductForm").submit();
 }
