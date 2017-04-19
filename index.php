@@ -43,7 +43,7 @@
           die("Connection failed: " . $conn->connect_error);
         }
 
-        $products = "SELECT * FROM product";
+        $products = "SELECT * FROM products";
         $result = $conn->query($products);
 
         if ($result->num_rows > 0) {

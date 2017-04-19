@@ -12,11 +12,11 @@ if (!$conn) {
 }
 
 mysqli_select_db($conn,"ajax_demo");
-$sql="SELECT * FROM product WHERE id = '".$q."'";
+$sql="SELECT * FROM customizableareas WHERE id = '".$q."'";
 $result = mysqli_query($conn,$sql);
 
 while($row = mysqli_fetch_array($result)) {
-  echo $row['img'];
+  echo $row['attributes'];
 }
 
 mysqli_close($conn);

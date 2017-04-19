@@ -56,9 +56,8 @@ function getProductImage(str) {
 
 // Updates the canvas with the selected product image and customizable attributes
 function setupProductCanvas(str) {
-  if (str=="") {
-    document.getElementById("productCanvasContainer").innerHTML="";
-    return;
+  if (str=="") { 
+    return; 
   }
   getProductImage(str);
 
@@ -69,40 +68,13 @@ function setupProductCanvas(str) {
   }
   xmlhttp.onreadystatechange=function() {
     if (this.readyState==4 && this.status==200) {
-      
+      var responseArray = this.responseText.split("}");
+      for(var i = 0; i < responseArray.length-1; i++) {
+        responseArray[i] += "}";
+        canvas.add(new fabric.Textbox('Sample Text',JSON.parse(responseArray[i])));
+      }
     }
   }
   xmlhttp.open("GET","php/setupProductCanvas.php?q="+str,true);
   xmlhttp.send();
-
-  var name = new fabric.Textbox('Sample Name', 
-        { left: 135, 
-          top: 200,
-          width: 400, 
-          hasControls: false,
-          lockMovementX: true,
-          lockMovementY: true,
-          hasBorders: true,
-          textAlign: "center"});
-      var address = new fabric.Textbox('123 Sample Address', 
-        { left: 135, 
-          top: 300,
-          width: 400, 
-          hasControls: false,
-          lockMovementX: true,
-          lockMovementY: true,
-          hasBorders: true,
-          textAlign: "center"});
-      var phone = new fabric.Textbox('123-456-7899', 
-        { left: 135, 
-          top: 350,
-          width: 400, 
-          hasControls: false,
-          lockMovementX: true,
-          lockMovementY: true,
-          hasBorders: true,
-          textAlign: "center"});
-      canvas.add(name);
-      canvas.add(address);
-      canvas.add(phone);
 }
