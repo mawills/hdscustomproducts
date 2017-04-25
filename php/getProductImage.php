@@ -11,7 +11,7 @@ if (!$conn) {
   die('Could not connect: ' . mysqli_error($conn));
 }
 
-mysqli_select_db($conn,"ajax_demo");
+mysqli_select_db($conn,$dbname);
 $sql="SELECT * FROM products WHERE id = '".$q."'";
 $result = mysqli_query($conn,$sql);
 

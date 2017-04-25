@@ -8,6 +8,7 @@
 
 <!-- Bootstrap -->
 <link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/hds.css" rel="stylesheet">
 <script src='lib/fabric.js-1.7.9/dist/fabric.js'></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -30,8 +31,12 @@
     <div class="col-lg-4">
       <h2 class="text-center">Product Properties: </h2>
       <form id="newProductForm" action="updateNewProduct.php">
-        Product Image URL:<br>
+        <h3>Upload a Product Image:</h3>
+        Upload from URL:<br>
         <input type="text" name='imgURL'>
+        <input type="button" onclick="updateNewProduct()" value="Update"><br>
+        Upload from Computer:<br>
+        <input type="file" id="imgLoader"><br>
         <input type="button" onclick="updateNewProduct()" value="Update">
       </form>
       <div id="productFields"></div>      
@@ -58,7 +63,6 @@
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/bootstrap.js"></script>
 <script src="js/mwscript.js"></script>
-
 
 </body>
 </html>

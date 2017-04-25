@@ -1,4 +1,5 @@
 var canvas = new fabric.Canvas('c');
+var placeholderTextArray;
 
 // Called when user submits design. Exports the content of the canvas to SVG format and displays it
 // TODO: Also stored in a user's "history" of designs
@@ -34,7 +35,7 @@ function updateFields(str) {
   xmlhttp.send();
 }
 
-// Returns product image URL from database
+// Adds product image to canvas using product image URL from database
 function getProductImage(str) {
   if (window.XMLHttpRequest) {
     xmlhttp=new XMLHttpRequest();
@@ -48,10 +49,26 @@ function getProductImage(str) {
         canvas.sendToBack(oImg);
         oImg.selectable = false;
       });
-      
     }
   }
   xmlhttp.open("GET","php/getProductImage.php?q="+str,true);
+  xmlhttp.send();
+}
+
+// Returns the placeholder text for the fabric.js Textboxes
+function getPlaceholderText(str) {
+  if (window.XMLHttpRequest) {
+    xmlhttp=new XMLHttpRequest();
+  } else {
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      placeholderTextArray = this.responseText.split("\r\n");
+    }
+  }
+
+  xmlhttp.open("GET","php/getPlaceholderText.php?q="+str,true);
   xmlhttp.send();
 }
 
@@ -60,7 +77,10 @@ function setupProductCanvas(str) {
   if (str=="") { 
     return; 
   }
+
   getProductImage(str);
+  getPlaceholderText(str);
+  console.log(placeholderTextArray);
 
   if (window.XMLHttpRequest) {
     xmlhttp=new XMLHttpRequest();
@@ -72,7 +92,7 @@ function setupProductCanvas(str) {
       var responseArray = this.responseText.split("}");
       for(var i = 0; i < responseArray.length-1; i++) {
         responseArray[i] += "}";
-        canvas.add(new fabric.Textbox('Sample Text',JSON.parse(responseArray[i])));
+        canvas.add(new fabric.Textbox(placeholderTextArray[i],JSON.parse(responseArray[i])));
       }
     }
   }

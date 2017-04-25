@@ -8,6 +8,7 @@
 
 <!-- Bootstrap -->
 <link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/hds.css" rel="stylesheet">
 <script src='lib/fabric.js-1.7.9/dist/fabric.js'></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -46,13 +47,13 @@
         $products = "SELECT * FROM products";
         $result = $conn->query($products);
 
+        echo $products;
+
         if ($result->num_rows > 0) {
             $menu = "";
             while($row = $result->fetch_assoc()) {
-              $menu .= '<option value="' . $row["id"] . '">' . $row["name"] . "</option>";
+              $menu .= '<option value="' . $row["id"] . '">' . $row["name"] . '</option>';
             }
-        } else {
-            echo "0 results";
         }
         echo $menu;  
       ?>
@@ -82,7 +83,6 @@
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/bootstrap.js"></script>
 <script src="js/mwscript.js"></script>
-
 
 </body>
 </html>
