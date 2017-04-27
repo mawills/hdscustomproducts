@@ -91,8 +91,6 @@ function setupProductCanvas(str) {
       var productCanvasSetupArray = this.responseText.split("}");
       for(var i = 0; i < productCanvasSetupArray.length-1; i++) {
         productCanvasSetupArray[i] += "}";
-        console.log(placeholderTextArray);
-        console.log(productCanvasSetupArray);
         canvas.add(new fabric.Textbox(placeholderTextArray[i],JSON.parse(productCanvasSetupArray[i])));
       }
     }

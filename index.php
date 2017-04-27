@@ -9,17 +9,19 @@
 <link href="css/kitchensink.css" rel="stylesheet">
 <link href="css/hds.css" rel="stylesheet">
 
-<script src="js/prisim.js"></script>
-<script src="js/fabric.js"></script>
-<script src="js/master.js"></script>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
-<script src="js/paster.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/app_config.js"></script>
-<script src="js/controller.js"></script>
 <script src="js/angular.min.js"></script>
-<script src="js/fiddle.js"></script>
+
+<script src="js/prisim.js" async></script>
+<script src="js/fabric.js" async></script>
+<script src="js/master.js" async></script>
+<script src="js/paster.js" async></script>
+<script src="js/utils.js" async></script>
+<script src="js/app_config.js" async></script>
+<script src="js/controller.js" async></script>
+
+<script src="js/mwscript.js" defer></script>
 
 </head>
 <body>
@@ -277,18 +279,14 @@
     </div>
   </div>
 
-<!-- <script src="../http://fabricjs.com/lib/centering_guidelines.js"></script>
-  <script src="../http://fabricjs.com/lib/aligning_guidelines.js"></script> -->
+<script src="http://fabricjs.com/lib/font_definitions.js"></script>
+<script src="http://fabricjs.com/js/kitchensink/app_config.js" ></script>
+<script src="http://fabricjs.com/js/kitchensink/controller.js" ></script>
 
-  <script src="http://fabricjs.com/lib/font_definitions.js"></script>
-  <script>
-    var kitchensink = {};
-    var canvas = new fabric.Canvas('canvas');
-  </script>
-  <script src="http://fabricjs.com/js/kitchensink/app_config.js"></script>
-  <script src="http://fabricjs.com/js/kitchensink/controller.js"></script>
-
-  <script src="js/mwscript.js"></script>
+<script>
+  var kitchensink = {};
+  var canvas = new fabric.Canvas('canvas');
+</script>
 
 </body>
 </html>
