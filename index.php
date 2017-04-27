@@ -1,7 +1,7 @@
 <html lang="en" ng-app="kitchensink">
 <head>
 <title>HDS Custom Products</title>
-<link rel="icon" href="res/icon.png" type="image/x-icon">
+<link rel="icon" href="assets/icon.png" type="image/x-icon">
 
 <link href="css/master.css" rel="stylesheet">
 <link href="css/prisim.css" rel="stylesheet">
@@ -13,15 +13,15 @@
 <script src="js/bootstrap.js"></script>
 <script src="js/angular.min.js"></script>
 
-<script src="js/prisim.js" async></script>
-<script src="js/fabric.js" async></script>
-<script src="js/master.js" async></script>
-<script src="js/paster.js" async></script>
-<script src="js/utils.js" async></script>
-<script src="js/app_config.js" async></script>
-<script src="js/controller.js" async></script>
+<script async src="js/prisim.js"></script>
+<script async src="js/fabric.js"></script>
+<script async src="js/master.js"></script>
+<script async src="js/paster.js"></script>
+<script async src="js/utils.js"></script>
+<script async src="js/app_config.js"></script>
+<script async src="js/controller.js"></script>
 
-<script src="js/mwscript.js" defer></script>
+<script defer src="js/mwscript.js" ></script>
 
 </head>
 <body>
@@ -31,7 +31,10 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-lg-4">
+  <p class="text-center">The HDS Custom Produects web app is a quick and simple way to create product mock-ups and proofs to share with your HDS sales rep.</p>
+</div>
+<div class="row">
+  <div class="col-lg-4 col-lg-offset-1">
       <h2>Select Product: </h2>
       <form>
       <select name="products" onchange="updateSelection(this.value)">
@@ -174,6 +177,8 @@
             <input type="button" onclick="updateNewProduct()" value="Update">
           </form>
 
+          <p><i>Note: Images must be <strong>.SVG</strong> (Scalable Vector Graphics) format to be useable for printing.</i></p>
+
         </div>
 
         <div class="tab-pane active" id="object-controls-pane">
@@ -267,7 +272,7 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <button class="btn btn-success pull-right" id="rasterize-svg" ng-click="rasterizeSVG()">
+      <button class="btn btn-success pull-right" id="rasterize-svg" ng-click="rasterizeSVG()" onclick="submitCanvas()">
         Submit
       </button>
       <button class="btn btn-object-action pull-right" id="save-new-product" ng-click="saveNewProduct()">

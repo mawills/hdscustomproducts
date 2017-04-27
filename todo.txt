@@ -1,7 +1,0 @@
-TODO:
-    Move script in index.php to improve performance
-    Make Submit button insert into database
-    Add login to index.php
-    Consolidate database connections in php files
-    Fix image uploader for canvas
-    Fix bug that sometimes causes placeholder text to fail to load (sync issue most likely)

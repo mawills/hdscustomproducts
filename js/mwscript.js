@@ -90,6 +90,7 @@ function setupProductCanvas(str) {
     if (this.readyState==4 && this.status==200) {
       var productCanvasSetupArray = this.responseText.split("}");
       for(var i = 0; i < productCanvasSetupArray.length-1; i++) {
+        console.log(placeholderTextArray);
         productCanvasSetupArray[i] += "}";
         canvas.add(new fabric.Textbox(placeholderTextArray[i],JSON.parse(productCanvasSetupArray[i])));
       }
