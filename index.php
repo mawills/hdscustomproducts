@@ -1,6 +1,7 @@
 <html lang="en" ng-app="kitchensink">
 <head>
 <title>HDS Custom Products</title>
+<link rel="icon" href="res/icon.png" type="image/x-icon">
 
 <link href="css/master.css" rel="stylesheet">
 <link href="css/prisim.css" rel="stylesheet">
