@@ -6,6 +6,7 @@
 <link href="css/prisim.css" rel="stylesheet">
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/kitchensink.css" rel="stylesheet">
+<link href="css/hds.css" rel="stylesheet">
 
 <script src="js/prisim.js"></script>
 <script src="js/fabric.js"></script>
@@ -262,8 +263,16 @@
   <hr>
 
   <div class="row">
-    <div class="col-lg-offset-10">
-      <button class="btn btn-success" id="rasterize-svg" ng-click="rasterizeSVG()">Submit</button>
+    <div class="col-lg-12">
+      <button class="btn btn-success pull-right" id="rasterize-svg" ng-click="rasterizeSVG()">
+        Submit
+      </button>
+      <button class="btn btn-object-action pull-right" id="save-new-product" ng-click="saveNewProduct()">
+        Save New Product
+      </button>
+      <button class="btn btn-danger pull-right " id="delete-product" ng-click="deleteProduct()">
+        Delete Product
+      </button>
     </div>
   </div>
 

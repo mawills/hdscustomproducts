@@ -5,3 +5,9 @@
 #global-controls {
     margin-top:4px;
 }
+
+#rasterize-svg,
+#save-new-product,
+#delete-product {
+    margin: 0 4px;
+}
