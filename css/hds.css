@@ -1,3 +1,7 @@
 #c {
     border: 1px solid black;
 }
+
+#global-controls {
+    margin-top:4px;
+}

@@ -1,6 +1,6 @@
 <html lang="en" ng-app="kitchensink">
 <head>
-<title>HDS Custom Products</title>
+<title>Kitchensink</title>
 
 <link href="css/master.css" rel="stylesheet">
 <link href="css/prisim.css" rel="stylesheet">
@@ -21,11 +21,6 @@
 
 </head>
 <body>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <h1 class="text-center">HDS Custom Products</h1>
-  </div>
-</div>
 <div class="row">
   <div class="col-lg-4">
       <h2>Select Product: </h2>
@@ -109,6 +104,14 @@
             <input type="color" value="" id="text-lines-bg-color" size="10" class="btn-object-action" bind-value-to="textBgColor">
           </div>
           <div>
+            <label for="text-stroke-color">Stroke color:</label>
+            <input type="color" value="" id="text-stroke-color" class="btn-object-action" bind-value-to="strokeColor">
+          </div>
+          <div>
+            <label for="text-stroke-width">Stroke width:</label>
+            <input type="range" value="1" min="1" max="5" id="text-stroke-width" class="btn-object-action" bind-value-to="strokeWidth">
+          </div>
+          <div>
             <label for="text-font-size">Font size:</label>
             <input type="range" value="" min="1" max="120" step="1" id="text-font-size" class="btn-object-action" bind-value-to="fontSize">
           </div>
@@ -140,19 +143,20 @@
     <div id="commands" ng-click="maybeLoadShape($event)">
 
       <ul class="nav nav-tabs">
-        <li><a href="#simple-shapes" data-toggle="tab">Text / Images</a></li>
+        <li><a href="#simple-shapes" data-toggle="tab">Simple</a></li>
+        <li><a href="#svg-shapes" data-toggle="tab">SVG</a></li>
         <li class="active"><a href="#object-controls-pane" data-toggle="tab">Controls</a></li>
+        <li><a href="#load-svg-pane" data-toggle="tab">Load SVG</a></li>
+        <li><a href="#execute-code" data-toggle="tab">Execute</a></li>
       </ul>
 
       <div class="tab-content">
 
+        <div class="tab-pane" id="svg-shapes">
+          <p>Add <strong>SVG shapes</strong> to canvas:</p>
+        </div>
+
         <div class="tab-pane" id="simple-shapes">
-
-          <p>Add <strong>text</strong> to canvas:</p>
-          <p>
-            <button class="btn" ng-click="addText()">Add text</button>
-          </p>
-
           <p>Add <strong>simple shapes</strong> to canvas:</p>
           <p>
             <button type="button" class="btn rect" ng-click="addRect()">Rectangle</button>
@@ -162,22 +166,66 @@
             <button type="button" class="btn polygon" ng-click="addPolygon()">Polygon</button>
           </p>
 
-          <p>Add <strong>image</strong> and misc to canvas:</p>
+          <p>
+            <button class="btn" ng-click="addText()">Add text</button>
+          </p>
 
-          <form id="newProductForm" action="updateNewProduct.php">
-            Upload from Computer:<br>
-            <input type="file" id="imgLoader"><br>
-            <input type="button" onclick="updateNewProduct()" value="Update">
-          </form>
+          <p>Add <strong>images</strong> to canvas:</p>
+          <p>
+            <button type="button" class="btn image1" ng-click="addImage1()">Image 1 (pug)</button>
+            <button type="button" class="btn image2" ng-click="addImage2()">Image 2 (google)</button>
+            <button type="button" class="btn image3" n-click="addImage3()">Image 3 (printio)</button>
+          </p>
 
+          <p>Add <strong>gradient-based shapes</strong> to canvas:</p>
+
+          <p>
+            <button class="btn shape" id="shape74">Gradient 1</button>
+            <button class="btn shape" id="shape66">Gradient 2</button>
+            <button class="btn shape" id="shape75">Gradient 3</button>
+            <button class="btn shape" id="shape148">Gradient 4</button>
+          </p>
+
+          <p>Add <strong>arcs</strong> and misc to canvas:</p>
+
+          <p>
+            <button class="btn shape" id="shape104">Arc(s) 1</button>
+            <button class="btn shape" id="shape105">Arc(s) 2</button>
+            <button class="btn shape" id="shape106">Arc(s) 3</button>
+            <button class="btn shape" id="shape107">Arc(s) 4</button>
+          </p>
+          <p>
+            <button class="btn shape" id="shape103">Transformed paths</button>
+          </p>
+          <p>
+            <button class="btn shape" id="shape54">Image</button>
+          </p>
         </div>
 
         <div class="tab-pane active" id="object-controls-pane">
+          <div id="global-controls">
+            <p>
+              Rasterize canvas to
+              <button class="btn btn-success" id="rasterize" ng-click="rasterize()">
+                Image
+              </button>
+              <button class="btn btn-success" id="rasterize-svg" ng-click="rasterizeSVG()">
+                SVG
+              </button>
+              <button class="btn btn-success" id="rasterize-json" ng-click="rasterizeJSON()">
+                JSON
+              </button>
+            </p>
+            <p>
+              <button class="btn btn-danger clear" ng-click="confirmClear()">Clear canvas</button>
+            </p>
+          </div>
+
           <div class="object-controls" object-buttons-enabled="getSelected()">
 
             <div style="margin-top:10px;">
               <p>
-                <button class="btn btn-danger" id="remove-selected" ng-click="removeSelected()">
+                <button class="btn btn-object-action" id="remove-selected" ng-click="removeSelected()">
                   Remove selected object/group
                 </button>
               </p>
@@ -203,6 +251,39 @@
               </button>
             </div>
 
+            <div style="margin-top:10px">
+              <p>
+                <span style="margin-right: 10px">Origin X: </span>
+                <label>
+                  Left
+                  <input type="radio" name="origin-x" class="origin-x btn-object-action" value="left" bind-value-to="originX">
+                </label>
+                <label>
+                  Center
+                  <input type="radio" name="origin-x" class="origin-x btn-object-action" value="center" bind-value-to="originX">
+                </label>
+                <label>
+                  Right
+                  <input type="radio" name="origin-x" class="origin-x btn-object-action" value="right" bind-value-to="originX">
+                </label>
+              </p>
+              <p>
+                <span style="margin-right: 10px">Origin Y: </span>
+                <label>
+                  Top
+                  <input type="radio" name="origin-y" class="origin-y btn-object-action" value="top" bind-value-to="originY">
+                </label>
+                <label>
+                  Center
+                  <input type="radio" name="origin-y" class="origin-y btn-object-action" value="center" bind-value-to="originY">
+                </label>
+                <label>
+                  Bottom
+                  <input type="radio" name="origin-y" class="origin-y btn-object-action" value="bottom" bind-value-to="originY">
+                </label>
+              </p>
+            </div>
+
             <div style="margin-top:10px;">
               <button id="send-backwards" class="btn btn-object-action" ng-click="sendBackwards()">Send backwards</button>
               <button id="send-to-back" class="btn btn-object-action" ng-click="sendToBack()">Send to back</button>
@@ -213,6 +294,20 @@
               <button id="bring-to-front" class="btn btn-object-action" ng-click="bringToFront()">Bring to front</button>
             </div>
 
+            <div style="margin-top:10px;">
+              <button id="gradientify" class="btn btn-object-action" ng-click="gradientify()">
+                Gradientify
+              </button>
+              <button id="shadowify" class="btn btn-object-action" ng-click="shadowify()">
+                Shadowify
+              </button>
+              <button id="patternify" class="btn btn-object-action" ng-click="patternify()">
+                Patternify
+              </button>
+              <button id="clip" class="btn btn-object-action" ng-click="clip()">
+                Clip
+              </button>
+            </div>
           </div>
           <div style="margin-top:10px;" id="drawing-mode-wrapper">
 
@@ -243,42 +338,43 @@
               <label for="drawing-shadow-width">Line shadow width:</label>
               <input type="range" value="0" min="0" max="50" bind-value-to="drawingLineShadowWidth">
             </div>
-
-            <div id="global-controls" style="margin-top:10px;">
-              <p>
-                <button class="btn btn-danger clear" ng-click="confirmClear()">Clear canvas</button>
-              </p>
-            </div>
-
           </div>
         </div>
 
+        <div class="tab-pane" id="load-svg-pane">
+          <textarea id="svg-console" bind-value-to="consoleSVG">
+          </textarea>
+          <button type="button" class="btn btn-info" ng-click="loadSVG()">
+            Load
+          </button>
+          <button type="button" class="btn" ng-click="loadSVGWithoutGrouping()">
+            Load without grouping
+          </button>
+        </div>
+
+        <div class="tab-pane" id="execute-code">
+          <textarea id="canvas-console" bind-value-to="console">
+          </textarea>
+          <button type="button" class="btn btn-info" ng-click="execute()">Execute</button>
+        </div>
       </div>
 
     </div>
 
+    <!-- <script src="../http://fabricjs.com/lib/centering_guidelines.js"></script>
+    <script src="../http://fabricjs.com/lib/aligning_guidelines.js"></script> -->
+
+    <script src="http://fabricjs.com/lib/font_definitions.js"></script>
+    <script>
+      var kitchensink = {};
+      var canvas = new fabric.Canvas('canvas');
+    </script>
+    <script src="http://fabricjs.com/js/kitchensink/app_config.js"></script>
+    <script src="http://fabricjs.com/js/kitchensink/controller.js"></script>
+
+    <script src="js/mwscript.js"></script>
+
   </div>
-
-  <hr>
-
-  <div class="row">
-    <div class="col-lg-offset-10">
-      <button class="btn btn-success" id="rasterize-svg" ng-click="rasterizeSVG()">Submit</button>
-    </div>
-  </div>
-
-<!-- <script src="../http://fabricjs.com/lib/centering_guidelines.js"></script>
-  <script src="../http://fabricjs.com/lib/aligning_guidelines.js"></script> -->
-
-  <script src="http://fabricjs.com/lib/font_definitions.js"></script>
-  <script>
-    var kitchensink = {};
-    var canvas = new fabric.Canvas('canvas');
-  </script>
-  <script src="http://fabricjs.com/js/kitchensink/app_config.js"></script>
-  <script src="http://fabricjs.com/js/kitchensink/controller.js"></script>
-
-  <script src="js/mwscript.js"></script>
 
 </body>
 </html>

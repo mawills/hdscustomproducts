@@ -18,6 +18,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+<body>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -45,6 +46,7 @@
       <h2 class="text-center">Product Image:</h2>
       <div id="productCanvasContainer">
         <canvas id="c" width="800" height="600"></canvas>
+        <script async src="//jsfiddle.net/zmWs4/embed/result/"></script>
       </div>
     </div>
   </div>

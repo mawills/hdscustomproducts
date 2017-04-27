@@ -1,4 +1,4 @@
-var canvas = new fabric.Canvas('c');
+
 var placeholderTextArray;
 
 // Called when user submits design. Exports the content of the canvas to SVG format and displays it
@@ -80,7 +80,6 @@ function setupProductCanvas(str) {
 
   getProductImage(str);
   getPlaceholderText(str);
-  console.log(placeholderTextArray);
 
   if (window.XMLHttpRequest) {
     xmlhttp=new XMLHttpRequest();
@@ -89,10 +88,12 @@ function setupProductCanvas(str) {
   }
   xmlhttp.onreadystatechange=function() {
     if (this.readyState==4 && this.status==200) {
-      var responseArray = this.responseText.split("}");
-      for(var i = 0; i < responseArray.length-1; i++) {
-        responseArray[i] += "}";
-        canvas.add(new fabric.Textbox(placeholderTextArray[i],JSON.parse(responseArray[i])));
+      var productCanvasSetupArray = this.responseText.split("}");
+      for(var i = 0; i < productCanvasSetupArray.length-1; i++) {
+        productCanvasSetupArray[i] += "}";
+        console.log(placeholderTextArray);
+        console.log(productCanvasSetupArray);
+        canvas.add(new fabric.Textbox(placeholderTextArray[i],JSON.parse(productCanvasSetupArray[i])));
       }
     }
   }
@@ -103,6 +104,11 @@ function setupProductCanvas(str) {
 // Adds a new product to the database
 function saveNewProduct() {
 
+}
+
+// Removes a product from the database
+function deleteProduct() {
+  
 }
 
 // Updates the canvas when a user is editing a new product to add to the database
