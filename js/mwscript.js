@@ -1,13 +1,3 @@
-
-var placeholderTextArray;
-
-// Called when user submits design. Exports the content of the canvas to SVG format and displays it
-// TODO: Also stored in a user's "history" of designs
-// TODO: Also emails a copy of the SVG to an HDS employee
-function submitCanvas() {
-  window.open("data:image/svg+xml;utf8," + canvas.toSVG());
-}
-
 // Called when user selects a product from the drop-down menu. Updates the page with new product info/canvas
 function updateSelection(str) {
   canvas.clear();
@@ -113,4 +103,11 @@ function deleteProduct() {
 // Updates the canvas when a user is editing a new product to add to the database
 function updateNewProduct() {
   document.getElementById("newProductForm").submit();
+}
+
+// Called when user submits design. Exports the content of the canvas to SVG format and displays it
+// TODO: Also stored in a user's "history" of designs
+// TODO: Also emails a copy of the SVG to an HDS employee
+function submitCanvas() {
+  window.open("data:image/svg+xml;utf8," + canvas.toSVG());
 }
