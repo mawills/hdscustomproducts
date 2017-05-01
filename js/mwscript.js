@@ -21,7 +21,7 @@ function updateFields(str) {
       document.getElementById("productFields").innerHTML=this.responseText;
     }
   }
-  xmlhttp.open("GET","php/getProductFields.php?q="+str,true);
+  xmlhttp.open("GET","php/getProductFields.php?q="+str,false);
   xmlhttp.send();
 }
 
@@ -41,7 +41,7 @@ function getProductImage(str) {
       });
     }
   }
-  xmlhttp.open("GET","php/getProductImage.php?q="+str,true);
+  xmlhttp.open("GET","php/getProductImage.php?q="+str,false);
   xmlhttp.send();
 }
 
@@ -58,7 +58,7 @@ function getPlaceholderText(str) {
     }
   }
 
-  xmlhttp.open("GET","php/getPlaceholderText.php?q="+str,true);
+  xmlhttp.open("GET","php/getPlaceholderText.php?q="+str,false);
   xmlhttp.send();
 }
 
@@ -86,7 +86,7 @@ function setupProductCanvas(str) {
       }
     }
   }
-  xmlhttp.open("GET","php/setupProductCanvas.php?q="+str,true);
+  xmlhttp.open("GET","php/setupProductCanvas.php?q="+str,false);
   xmlhttp.send();
 }
 
