@@ -168,12 +168,18 @@
             <button type="button" class="btn polygon" ng-click="addPolygon()">Polygon</button>
           </p>
 
-          <p>Add <strong>image</strong> and misc to canvas:</p>
+          <p>Add <strong>image</strong> to canvas:</p>
 
           <form id="newProductForm" action="updateNewProduct.php">
             Upload from Computer:<br>
-            <input type="file" id="imgLoader"><br>
-            <input type="button" onclick="updateNewProduct()" value="Update">
+            <input type="file" id="addImage"><br>
+          </form>
+
+          <p>Set <strong>background image</strong> for canvas:</p>
+
+          <form id="newProductForm" action="updateNewProduct.php">
+            Upload from Computer:<br>
+            <input type="file" id="addBackgroundImage" onclick="addImage()"><br>
           </form>
 
           <p><i>Note: Images must be <strong>.SVG</strong> (Scalable Vector Graphics) format to be useable for printing.</i></p>

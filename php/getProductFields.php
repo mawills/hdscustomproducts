@@ -1,7 +1,7 @@
 <?php
 require 'serverConnect.php';
 
-$sql="SELECT * FROM fieldheaders WHERE id = '".$q."'";
+$sql="SELECT * FROM field_headers WHERE id = '".$q."'";
 $result = mysqli_query($conn,$sql);
 
 echo '<h2>Customizable Options:</h2>';
