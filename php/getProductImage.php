@@ -1,5 +1,5 @@
 <?php
-include 'serverConnect.php';
+require 'serverConnect.php';
 
 $sql="SELECT * FROM products WHERE id = '".$q."'";
 $result = mysqli_query($conn,$sql);

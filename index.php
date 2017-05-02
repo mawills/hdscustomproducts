@@ -291,7 +291,6 @@
 <script>
   var kitchensink = {};
   var canvas = new fabric.Canvas('canvas');
-  var placeholderTextArray;
 </script>
 
 </body>

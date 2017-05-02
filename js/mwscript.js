@@ -6,12 +6,13 @@ function updateSelection(str) {
 }
 
 // Returns field header strings from database to display on page
+// NOTE: NOT CURRENTLY IN USE
 function updateFields(str) {
   if (str=="") {
     document.getElementById("productFields").innerHTML="";
     return;
   }
-  if (window.XMLHttpRequest) {
+  /*if (window.XMLHttpRequest) {
     xmlhttp=new XMLHttpRequest();
   } else {
     xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
@@ -22,44 +23,10 @@ function updateFields(str) {
     }
   }
   xmlhttp.open("GET","php/getProductFields.php?q="+str,false);
-  xmlhttp.send();
-}
-
-// Adds product image to canvas using product image URL from database
-function getProductImage(str) {
-  if (window.XMLHttpRequest) {
-    xmlhttp=new XMLHttpRequest();
-  } else {
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=function() {
-    if (this.readyState==4 && this.status==200) {
-      fabric.Image.fromURL(this.responseText, function(oImg) {
-        canvas.add(oImg);
-        canvas.sendToBack(oImg);
-        oImg.selectable = false;
-      });
-    }
-  }
-  xmlhttp.open("GET","php/getProductImage.php?q="+str,false);
-  xmlhttp.send();
-}
-
-// Returns the placeholder text for the fabric.js Textboxes
-function getPlaceholderText(str) {
-  if (window.XMLHttpRequest) {
-    xmlhttp=new XMLHttpRequest();
-  } else {
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=function() {
-    if (this.readyState==4 && this.status==200) {
-      placeholderTextArray = this.responseText.split("\r\n");
-    }
-  }
-
-  xmlhttp.open("GET","php/getPlaceholderText.php?q="+str,false);
-  xmlhttp.send();
+  xmlhttp.send();*/
+  $.get('php/getProductFields.php?q='+str, function(data) {
+    $("#productFields").innerHTML=this.responseText;
+  });
 }
 
 // Updates the canvas with the selected product image and customizable attributes
@@ -67,27 +34,25 @@ function setupProductCanvas(str) {
   if (str=="") { 
     return; 
   }
+  var placeholderTextArray;
 
-  getProductImage(str);
-  getPlaceholderText(str);
+  $.get("php/getPlaceholderText.php?q="+str).then(function(placeholderText) {
+    placeholderTextArray = placeholderText.split("\r\n");
+    return $.get("php/getProductImage.php?q="+str);
 
-  if (window.XMLHttpRequest) {
-    xmlhttp=new XMLHttpRequest();
-  } else {
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=function() {
-    if (this.readyState==4 && this.status==200) {
-      var productCanvasSetupArray = this.responseText.split("}");
-      for(var i = 0; i < productCanvasSetupArray.length-1; i++) {
-        console.log(placeholderTextArray);
-        productCanvasSetupArray[i] += "}";
-        canvas.add(new fabric.Textbox(placeholderTextArray[i],JSON.parse(productCanvasSetupArray[i])));
-      }
+  }).then(function(productImage) {
+    fabric.Image.fromURL(productImage, function(oImg) {
+        canvas.setBackgroundImage(oImg, canvas.renderAll.bind(canvas));
+      });
+    return $.get("php/setupProductCanvas.php?q="+str)
+
+  }).then(function(productCanvas) {
+    var productCanvasSetupArray = productCanvas.split("}");
+    for(var i = 0; i < productCanvasSetupArray.length-1; i++) {
+      productCanvasSetupArray[i] += "}";
+      canvas.add(new fabric.Textbox(placeholderTextArray[i],JSON.parse(productCanvasSetupArray[i])));
     }
-  }
-  xmlhttp.open("GET","php/setupProductCanvas.php?q="+str,false);
-  xmlhttp.send();
+  })
 }
 
 // Adds a new product to the database
