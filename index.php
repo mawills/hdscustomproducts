@@ -19,7 +19,6 @@
 <script async src="js/paster.js"></script>
 <script async src="js/utils.js"></script>
 <script async src="js/app_config.js"></script>
-<script async src="js/controller.js"></script>
 
 <script defer src="js/mwscript.js" ></script>
 
@@ -276,7 +275,10 @@
         Submit
       </button>
       <button class="btn btn-object-action pull-right" id="save-new-product" ng-click="saveNewProduct()">
-        Save New Product
+        Save As New Product
+      </button>
+      <button class="btn btn-object-action pull-right" id="save-new-product" ng-click="saveProduct()">
+        Save
       </button>
       <button class="btn btn-danger pull-right " id="delete-product" ng-click="deleteProduct()">
         Delete Product
@@ -289,8 +291,14 @@
 <script src="http://fabricjs.com/js/kitchensink/controller.js" ></script>
 
 <script>
-  var kitchensink = {};
+  //var kitchensink = {};
   var canvas = new fabric.Canvas('canvas');
+</script>
+<script>
+  canvas.clear();
+  canvas.setBackgroundImage("http://coolwildlife.com/wp-content/uploads/galleries/post-3004/Fox%20Picture%20003.jpg", canvas.renderAll.bind(canvas));
+  canvas.clear();
+  canvas.renderAll();
 </script>
 
 </body>
