@@ -71,7 +71,7 @@
 
     <div style="position:relative;width:704px;float:left;" id="canvas-wrapper">
 
-      <canvas id="canvas" width="700" height="600"></canvas>
+      <canvas id="canvas" style="border:2px solid #000000;"></canvas>
 
       <div id="color-opacity-controls" ng-show="canvas.getActiveObject()">
         <label for="opacity">Opacity: </label>
@@ -174,13 +174,41 @@
             Upload from Computer:<br>
             <input type="file" id="addImage"><br>
           </form>
+          <script>
+            document.getElementById('addImage').addEventListener("change", function (e) {
+              var file = e.target.files[0];
+              var reader = new FileReader();
+              reader.onload = function (f) {
+                var data = f.target.result;                    
+                fabric.Image.fromURL(data, function (img) {
+                  var oImg = img.set({left: 0, top: 0, angle: 0});
+                  canvas.add(oImg).renderAll();
+                });
+              };
+              reader.readAsDataURL(file);
+            });
+          </script>
 
           <p>Set <strong>background image</strong> for canvas:</p>
 
           <form id="newProductForm" action="updateNewProduct.php">
             Upload from Computer:<br>
-            <input type="file" id="addBackgroundImage" onclick="addImage()"><br>
+            <input type="file" id="addBackgroundImage""><br>
           </form>
+          <script>
+            document.getElementById('addBackgroundImage').addEventListener("change", function (e) {
+              var file = e.target.files[0];
+              var reader = new FileReader();
+              reader.onload = function (f) {
+                var data = f.target.result;                    
+                fabric.Image.fromURL(data, function (oImg) {
+                  scaleCanvasSizeAndBackgroundImage(oImg);
+                  canvas.setBackgroundImage(oImg).renderAll();
+                });
+              };
+              reader.readAsDataURL(file);
+            });
+          </script>
 
           <p><i>Note: Images must be <strong>.SVG</strong> (Scalable Vector Graphics) format to be useable for printing.</i></p>
 
@@ -299,12 +327,8 @@
 <script>
   //var kitchensink = {};
   var canvas = new fabric.Canvas('canvas');
-</script>
-<script>
-  canvas.clear();
-  canvas.setBackgroundImage("http://coolwildlife.com/wp-content/uploads/galleries/post-3004/Fox%20Picture%20003.jpg", canvas.renderAll.bind(canvas));
-  canvas.clear();
-  canvas.renderAll();
+  canvas.setHeight(600);
+  canvas.setWidth(700);
 </script>
 
 </body>
