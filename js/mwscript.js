@@ -37,6 +37,7 @@ function setupProductCanvas(str) {
   });
 }
 
+// Resizes the canvas to fit the background image, unless the background image is > max dimensions, instead scales background image
 function scaleCanvasSizeAndBackgroundImage(oImg) {
   if(oImg.height > CANVAS_MAX_HEIGHT) {
     if(oImg.height > oImg.width) {
@@ -59,13 +60,29 @@ function scaleCanvasSizeAndBackgroundImage(oImg) {
 }
 
 // Adds a new product to the database
-function saveNewProduct() {
-
+function saveNewProduct(name, imgURL, productID, attributes) {
+  $.ajax({
+    url: "php/saveNewProduct.php",
+    type: "POST",
+    async: false,
+    data: {
+      "done": 1,
+      "name": name,
+      "imgURL": imgURL,
+      "productID": productID,
+      "attributes": attributes
+    },
+    success: function(data) {
+      console.log(canvas.toJSON());
+    }
+  });
 }
 
 // Saves the changes to a product after a user edits it
-function saveProduct() {
-
+function saveProduct(id, productID, attributes) {
+  console.log(attributes);
+  $.post("php/updateProduct.php?id="+id+"productID="+productID+"attributes="+attributes)
+    
 }
 
 // Removes a product from the database

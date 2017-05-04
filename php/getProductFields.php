@@ -1,6 +1,8 @@
 <?php
 require 'serverConnect.php';
 
+$q = intval($_GET['q']);
+
 $sql="SELECT * FROM field_headers WHERE id = '".$q."'";
 $result = mysqli_query($conn,$sql);
 

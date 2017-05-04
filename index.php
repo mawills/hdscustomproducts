@@ -308,10 +308,10 @@
       <button class="btn btn-success pull-right" id="rasterize-svg" ng-click="rasterizeSVG()" onclick="submitCanvas()">
         Submit
       </button>
-      <button class="btn btn-object-action pull-right" id="save-new-product" ng-click="saveNewProduct()">
+      <button class="btn btn-object-action pull-right" id="save-new-product-button" onclick="saveNewProduct()">
         Save As New Product
       </button>
-      <button class="btn btn-object-action pull-right" id="save-new-product" ng-click="saveProduct()">
+      <button class="btn btn-object-action pull-right" id="save-product-button" ng-click="saveProduct()">
         Save
       </button>
       <button class="btn btn-danger pull-right " id="delete-product" ng-click="deleteProduct()">

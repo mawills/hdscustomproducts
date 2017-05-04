@@ -1,6 +1,8 @@
 <?php
 require 'serverConnect.php';
 
+$q = intval($_GET['q']);
+
 $sql="SELECT * FROM customizable_areas WHERE productid = '".$q."'";
 $result = mysqli_query($conn,$sql);
 
