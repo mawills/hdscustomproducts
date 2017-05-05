@@ -1,17 +1,9 @@
 <?php
 require 'serverConnect.php';
 
-$productID = "1337";
-$attributes = "test";
-$placeholder = "TEST";
+$name = $_POST['name'];
+$attributes = $_POST['attributes'];
 
-if(isset($_POST['done'])) {
-    $name = $_POST['name'];
-    $imgURL = $_POST['imgURL'];
+echo $attributes;
 
-    echo $name;
-    echo $imgURL;
-
-    mysqli_query($conn,"INSERT INTO products (name, imgURL) VALUES ('$name','$imgURL')");
-    
-}
+mysqli_query($conn,"INSERT INTO products (name, attributes) VALUES ('$name','$attributes')");

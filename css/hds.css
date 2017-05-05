@@ -7,7 +7,12 @@
 }
 
 #rasterize-svg,
-#save-new-product,
+#save-new-product-button,
+#save-product-button,
 #delete-product {
     margin: 0 4px;
+}
+
+.row {
+    margin: 0;
 }

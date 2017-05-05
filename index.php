@@ -57,7 +57,7 @@
         if ($result->num_rows > 0) {
             $menu = "";
             while($row = $result->fetch_assoc()) {
-              $menu .= '<option value="' . $row["id"] . '">' . $row["name"] . '</option>';
+              $menu .= '<option value="' . $row["ID"] . '">' . $row["Name"] . '</option>';
             }
         }
         echo $menu;  
@@ -304,14 +304,14 @@
   <hr>
 
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-11">
       <button class="btn btn-success pull-right" id="rasterize-svg" ng-click="rasterizeSVG()" onclick="submitCanvas()">
         Submit
       </button>
       <button class="btn btn-object-action pull-right" id="save-new-product-button" onclick="saveNewProduct()">
         Save As New Product
       </button>
-      <button class="btn btn-object-action pull-right" id="save-product-button" ng-click="saveProduct()">
+      <button class="btn btn-object-action pull-right" id="save-product-button" onclick="saveProduct()">
         Save
       </button>
       <button class="btn btn-danger pull-right " id="delete-product" ng-click="deleteProduct()">

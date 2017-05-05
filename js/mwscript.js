@@ -9,31 +9,18 @@ function updateSelection(str) {
 
 // Updates the canvas with the selected product image and placeholder text/images
 function setupProductCanvas(str) {
-  if (str=="") { 
+  if (str=="") {
     return; 
   }
 
-  var placeholderTextArray;
-
-  $.get("php/getPlaceholderText.php?q="+str).then(function(placeholderText) {
-    placeholderTextArray = placeholderText.split("\r\n");
-    return $.get("php/getProductImage.php?q="+str);
-
-  }).then(function(productImage) {
-    fabric.Image.fromURL(productImage, function(oImg) {
-        scaleCanvasSizeAndBackgroundImage(oImg);
-
-        canvas.setBackgroundImage(oImg, canvas.renderAll.bind(canvas));
-      });
-    return $.get("php/setupProductCanvas.php?q="+str)
-
-  }).then(function(productCanvas) {
-    var productCanvasSetupArray = productCanvas.split("}");
-    productCanvasSetupArray.splice(-1,1);
-    for(var i = 0; i < productCanvasSetupArray.length; i++) {
-      productCanvasSetupArray[i] += "}";
-      canvas.add(new fabric.Textbox(placeholderTextArray[i],JSON.parse(productCanvasSetupArray[i])));
-    }
+  $.get("php/setupProductCanvas.php?q="+str, function(data) {
+    console.log(data);
+    console.log(data[549]);
+    console.log(data[550]);
+    console.log(data[551]);
+    console.log(data[552]);
+    console.log(data[553]);
+    canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
   });
 }
 
@@ -60,29 +47,23 @@ function scaleCanvasSizeAndBackgroundImage(oImg) {
 }
 
 // Adds a new product to the database
-function saveNewProduct(name, imgURL, productID, attributes) {
-  $.ajax({
-    url: "php/saveNewProduct.php",
-    type: "POST",
-    async: false,
-    data: {
-      "done": 1,
-      "name": name,
-      "imgURL": imgURL,
-      "productID": productID,
-      "attributes": attributes
-    },
-    success: function(data) {
-      console.log(canvas.toJSON());
-    }
-  });
+// TODO: Make sure the product doesn't already exist in the database
+function saveNewProduct() {
+  var name = prompt("Please enter a name for your product");
+  while(name == null) {
+    prompt("A name is required to save your product. Please choose a name.");
+  }
+  $.post("php/saveNewProduct.php",
+  {
+    name: name,
+    attributes: JSON.stringify(canvas.toJSON())
+  },
+  alert("Your new product "+name+" has been saved."));
 }
 
 // Saves the changes to a product after a user edits it
-function saveProduct(id, productID, attributes) {
-  console.log(attributes);
-  $.post("php/updateProduct.php?id="+id+"productID="+productID+"attributes="+attributes)
-    
+function saveProduct() {
+    console.log(JSON.stringify(canvas.toJSON()));
 }
 
 // Removes a product from the database
