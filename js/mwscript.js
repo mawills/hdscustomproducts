@@ -1,25 +1,15 @@
 var CANVAS_MAX_WIDTH = 700;
 var CANVAS_MAX_HEIGHT = 600;
 
-// Called when user selects a product from the drop-down menu. Updates the page with new product info/canvas
-function updateSelection(str) {
-  canvas.clear();
-  setupProductCanvas(str);
-}
-
 // Updates the canvas with the selected product image and placeholder text/images
 function setupProductCanvas(str) {
+  console.log(str);
   if (str=="") {
     return; 
   }
-
+  canvas.clear();
   $.get("php/setupProductCanvas.php?q="+str, function(data) {
     console.log(data);
-    console.log(data[549]);
-    console.log(data[550]);
-    console.log(data[551]);
-    console.log(data[552]);
-    console.log(data[553]);
     canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
   });
 }
@@ -49,9 +39,10 @@ function scaleCanvasSizeAndBackgroundImage(oImg) {
 // Adds a new product to the database
 // TODO: Make sure the product doesn't already exist in the database
 function saveNewProduct() {
+  console.log(JSON.stringify(canvas.toJSON()));
   var name = prompt("Please enter a name for your product");
-  while(name == null) {
-    prompt("A name is required to save your product. Please choose a name.");
+  while(name == "") {
+    name = prompt("A name is required to save your product. Please choose a name.");
   }
   $.post("php/saveNewProduct.php",
   {
