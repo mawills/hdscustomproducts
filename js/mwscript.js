@@ -3,13 +3,11 @@ var CANVAS_MAX_HEIGHT = 600;
 
 // Updates the canvas with the selected product image and placeholder text/images
 function setupProductCanvas(str) {
-  console.log(str);
   if (str=="") {
     return; 
   }
   canvas.clear();
   $.get("php/setupProductCanvas.php?q="+str, function(data) {
-    console.log(data);
     canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
   });
 }
@@ -39,22 +37,24 @@ function scaleCanvasSizeAndBackgroundImage(oImg) {
 // Adds a new product to the database
 // TODO: Make sure the product doesn't already exist in the database
 function saveNewProduct() {
-  console.log(JSON.stringify(canvas.toJSON()));
+  console.log(JSON.stringify(canvas));
   var name = prompt("Please enter a name for your product");
   while(name == "") {
     name = prompt("A name is required to save your product. Please choose a name.");
   }
-  $.post("php/saveNewProduct.php",
-  {
-    name: name,
-    attributes: JSON.stringify(canvas.toJSON())
-  },
-  alert("Your new product "+name+" has been saved."));
+  if(name != null) {
+    $.post("php/saveNewProduct.php",
+    {
+      name: name,
+      attributes: JSON.stringify(canvas)
+    },
+    alert("Your new product "+name+" has been saved."));
+  }
 }
 
 // Saves the changes to a product after a user edits it
 function saveProduct() {
-    console.log(JSON.stringify(canvas.toJSON()));
+    
 }
 
 // Removes a product from the database

@@ -12,9 +12,9 @@
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/angular.min.js"></script>
+<script src="js/fabric.js"></script>
 
 <script async src="js/prisim.js"></script>
-<script async src="js/fabric.js"></script>
 <script async src="js/master.js"></script>
 <script async src="js/paster.js"></script>
 <script async src="js/utils.js"></script>
