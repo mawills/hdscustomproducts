@@ -156,7 +156,7 @@
 
           <p>Add <strong>text</strong> to canvas:</p>
           <p>
-            <button class="btn" ng-click="addText()">Add text</button>
+            <button class="btn" onclick="addTextbox()">Add text</button>
           </p>
 
           <p>Add <strong>simple shapes</strong> to canvas:</p>

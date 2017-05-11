@@ -67,3 +67,16 @@ function deleteProduct() {
 function submitCanvas() {
   window.open("data:image/svg+xml;utf8," + canvas.toSVG());
 }
+
+function addTextbox() {
+  var text = "Drag, resize, and edit this sample text!";
+  var textboxSettings = {
+    fontSize: 16,
+    fontFamily: 'Arial',
+    textAlign: 'left',  
+    width: 300,
+    height: 60,  
+  }; 
+
+  canvas.add(new fabric.Textbox(text, textboxSettings, {left: 0, top: 0}));
+}
