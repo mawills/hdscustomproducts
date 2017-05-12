@@ -1,13 +1,15 @@
 var CANVAS_MAX_WIDTH = 700;
 var CANVAS_MAX_HEIGHT = 600;
+var currentProduct;
 
 // Updates the canvas with the selected product image and placeholder text/images
-function setupProductCanvas(str) {
-  if (str=="") {
+function setupProductCanvas(productID) {
+  currentProduct = productID;
+  if (productID=="") {
     return; 
   }
   canvas.clear();
-  $.get("php/setupProductCanvas.php?q="+str, function(data) {
+  $.get("php/setupProductCanvas.php?q="+productID, function(data) {
     canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
   });
 }
@@ -35,9 +37,7 @@ function scaleCanvasSizeAndBackgroundImage(oImg) {
 }
 
 // Adds a new product to the database
-// TODO: Make sure the product doesn't already exist in the database
 function saveNewProduct() {
-  console.log(JSON.stringify(canvas));
   var name = prompt("Please enter a name for your product");
   while(name == "") {
     name = prompt("A name is required to save your product. Please choose a name.");
@@ -50,11 +50,16 @@ function saveNewProduct() {
     },
     alert("Your new product "+name+" has been saved."));
   }
+
+  // TODO: AFter saving a new product, change the currentProduct to the new product.
 }
 
 // Saves the changes to a product after a user edits it
 function saveProduct() {
-    
+  $.post("php/saveProduct.php", {id: currentProduct, attributes: JSON.stringify(canvas)})
+    .done(function(data) {
+      alert(data);
+    });
 }
 
 // Removes a product from the database
@@ -71,7 +76,7 @@ function submitCanvas() {
 function addTextbox() {
   var text = "Drag, resize, and edit this sample text!";
   var textboxSettings = {
-    fontSize: 16,
+    fontSize: 26,
     fontFamily: 'Arial',
     textAlign: 'left',  
     width: 300,

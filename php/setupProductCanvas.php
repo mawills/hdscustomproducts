@@ -1,9 +1,9 @@
 <?php
 require 'serverConnect.php';
 
-$q = intval($_GET['q']);
+$id = intval($_GET['id']);
 
-$sql="SELECT * FROM products WHERE ID = '".$q."'";
+$sql="SELECT * FROM products WHERE ID = '".$id."'";
 $result = mysqli_query($conn,$sql);
 
 while($row = mysqli_fetch_array($result)) {
