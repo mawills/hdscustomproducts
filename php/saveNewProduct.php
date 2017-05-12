@@ -4,6 +4,10 @@ require 'serverConnect.php';
 $name = $_POST['name'];
 $attributes = $_POST['attributes'];
 
-echo $attributes;
+$sql = "INSERT INTO products (name, attributes) VALUES ('$name','$attributes')"
+$result = mysqli_query($conn,$sql);
 
-mysqli_query($conn,"INSERT INTO products (name, attributes) VALUES ('$name','$attributes')");
+if(!$result) {
+    die("There was an error while saving the product: " + mysql_error());
+}
+echo "Your new product".$name."was saved successfully.";

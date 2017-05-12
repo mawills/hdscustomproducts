@@ -314,7 +314,7 @@
       <button class="btn btn-object-action pull-right" id="save-product-button" onclick="saveProduct()">
         Save
       </button>
-      <button class="btn btn-danger pull-right " id="delete-product" ng-click="deleteProduct()">
+      <button class="btn btn-danger pull-right " id="delete-product" onclick="deleteProduct()">
         Delete Product
       </button>
     </div>

@@ -1,6 +1,8 @@
 var CANVAS_MAX_WIDTH = 700;
 var CANVAS_MAX_HEIGHT = 600;
-var currentProduct;
+var currentProduct = 0;
+
+console.log("hi");
 
 // Updates the canvas with the selected product image and placeholder text/images
 function setupProductCanvas(productID) {
@@ -9,7 +11,7 @@ function setupProductCanvas(productID) {
     return; 
   }
   canvas.clear();
-  $.get("php/setupProductCanvas.php?q="+productID, function(data) {
+  $.get("php/setupProductCanvas.php?id="+productID, function(data) {
     canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
   });
 }
@@ -47,8 +49,10 @@ function saveNewProduct() {
     {
       name: name,
       attributes: JSON.stringify(canvas)
-    },
-    alert("Your new product "+name+" has been saved."));
+    })
+    .done(function(data) {
+      alert(data);
+    });
   }
 
   // TODO: AFter saving a new product, change the currentProduct to the new product.
@@ -56,7 +60,11 @@ function saveNewProduct() {
 
 // Saves the changes to a product after a user edits it
 function saveProduct() {
-  $.post("php/saveProduct.php", {id: currentProduct, attributes: JSON.stringify(canvas)})
+  $.post("php/saveProduct.php", 
+    {
+      id: currentProduct, 
+      attributes: JSON.stringify(canvas)
+    })
     .done(function(data) {
       alert(data);
     });
@@ -64,7 +72,15 @@ function saveProduct() {
 
 // Removes a product from the database
 function deleteProduct() {
-  
+  if(confirm("Are you sure?")) {
+    $.post("php/deleteProduct.php", 
+    {
+      id: currentProduct, 
+    })
+    .done(function(data) {
+      alert(data);
+    });
+  }
 }
 
 // Called when user submits design. Exports the content of the canvas to SVG format and displays it
