@@ -2,8 +2,6 @@ var CANVAS_MAX_WIDTH = 700;
 var CANVAS_MAX_HEIGHT = 600;
 var currentProduct = 0;
 
-console.log("hi");
-
 // Updates the canvas with the selected product image and placeholder text/images
 function setupProductCanvas(productID) {
   currentProduct = productID;
