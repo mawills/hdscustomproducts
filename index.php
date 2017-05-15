@@ -14,8 +14,9 @@
 
 <script async src="js/utils.js"></script>
 
+<script defer src="http://fabricjs.com/js/kitchensink/app_config.js" ></script>
 <script defer src="js/mwscript.js" ></script>
-
+<script defer src="js/controller.js" ></script>
 
 </head>
 <body>
@@ -312,10 +313,6 @@
       </button>
     </div>
   </div>
-
-<script src="http://fabricjs.com/lib/font_definitions.js"></script>
-<script src="http://fabricjs.com/js/kitchensink/app_config.js" ></script>
-<script src="http://fabricjs.com/js/kitchensink/controller.js" ></script>
 
 <script>
   var canvas = new fabric.Canvas('canvas');
