@@ -10,4 +10,4 @@ $result = mysqli_query($conn,$sql);
 if(!$result) {
     die("There was an error while saving the product: " + mysql_error());
 }
-echo "Your new product was saved successfully.";
+echo "Your new product was saved successfully. It will appear in the drop-down box after you refresh the page.";
