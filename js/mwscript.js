@@ -58,6 +58,7 @@ function saveNewProduct() {
 
 // Saves the changes to a product after a user edits it
 function saveProduct() {
+  console.log(JSON.stringify(canvas));
   $.post("php/saveProduct.php", 
     {
       id: currentProduct, 

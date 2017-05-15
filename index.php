@@ -3,8 +3,6 @@
 <title>HDS Custom Products</title>
 <link rel="icon" href="assets/icon.png" type="image/x-icon">
 
-<link href="css/master.css" rel="stylesheet">
-<link href="css/prisim.css" rel="stylesheet">
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/kitchensink.css" rel="stylesheet">
 <link href="css/hds.css" rel="stylesheet">
@@ -14,13 +12,10 @@
 <script src="js/angular.min.js"></script>
 <script src="js/fabric.js"></script>
 
-<script async src="js/prisim.js"></script>
-<script async src="js/master.js"></script>
-<script async src="js/paster.js"></script>
 <script async src="js/utils.js"></script>
-<script async src="js/app_config.js"></script>
 
 <script defer src="js/mwscript.js" ></script>
+
 
 </head>
 <body>
@@ -169,7 +164,6 @@
           </p>
 
           <p>Add <strong>image</strong> to canvas:</p>
-
           <form id="newProductForm" action="updateNewProduct.php">
             Upload from Computer:<br>
             <input type="file" id="addImage"><br>
@@ -190,7 +184,6 @@
           </script>
 
           <p>Set <strong>background image</strong> for canvas:</p>
-
           <form id="newProductForm" action="updateNewProduct.php">
             Upload from Computer:<br>
             <input type="file" id="addBackgroundImage""><br>
@@ -325,7 +318,6 @@
 <script src="http://fabricjs.com/js/kitchensink/controller.js" ></script>
 
 <script>
-  //var kitchensink = {};
   var canvas = new fabric.Canvas('canvas');
   canvas.setHeight(600);
   canvas.setWidth(700);
