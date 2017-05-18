@@ -1,7 +1,7 @@
 <?php
 require "serverConnect.php";
 
-$salt = "yoshibatheshiba";
+$salt = "Yoshiba the red Shiba Inu";
 $email = $_POST['email'];
 $password = $_POST['password'];
 $email = stripslashes(mysqli_real_escape_string($conn,$email));
