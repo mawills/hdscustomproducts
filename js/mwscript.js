@@ -51,6 +51,7 @@ function saveNewProduct() {
     .done(function(data) {
       alert(data);
     });
+    window.location.reload();
   }
 
   // TODO: AFter saving a new product, change the currentProduct to the new product.
@@ -80,6 +81,7 @@ function deleteProduct() {
       alert(data);
     });
   }
+  window.location.reload();
 }
 
 // Called when user submits design. Exports the content of the canvas to SVG format and displays it
