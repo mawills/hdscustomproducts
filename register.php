@@ -8,7 +8,8 @@
   <div id="main">
     <?php
     if(!empty($_POST['email']) && !empty($_POST['password'])) {
-      $password = md5(mysqli_real_escape_string($conn,$_POST['password']));
+      $salt = "yoshibatheshiba";
+      $password = hash('sha256',hash('md5',hash('md5',$salt.$_POST['password']) . hash('sha256',$salt.$_POST['password'])));
       $email = mysqli_real_escape_string($conn,$_POST['email']);
 
       $checkUserExists = mysqli_query($conn,"SELECT * FROM users WHERE Email = '".$email."'");

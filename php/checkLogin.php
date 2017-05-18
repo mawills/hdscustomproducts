@@ -1,10 +1,11 @@
 <?php
 require "serverConnect.php";
 
+$salt = "yoshibatheshiba";
 $email = $_POST['email'];
 $password = $_POST['password'];
 $email = stripslashes(mysqli_real_escape_string($conn,$email));
-$password = md5(stripslashes(mysqli_real_escape_string($conn,$password)));
+$password = hash('sha256',hash('md5',hash('md5',$salt.$password) . hash('sha256',$salt.$password)));
 
 $sql = "SELECT * FROM users WHERE Email='$email' and Password='$password'";
 $result = mysqli_query($conn,$sql);
