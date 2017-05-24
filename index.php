@@ -111,7 +111,11 @@
       <select name="products" onchange="setupProductCanvas(this.value)">
       <option value="">Choose a Product Below...</option>
       <?php
-        $products = "SELECT * FROM products";
+        $userID = intval($_SESSION['UserID']);
+        $products = "SELECT * FROM products WHERE UserID = '$userID'";
+        if($userID == 14) {
+          $products = "SELECT * FROM products";
+        }
         $result = $conn->query($products);
 
         echo $products;

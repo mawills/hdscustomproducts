@@ -12,6 +12,11 @@ $result = mysqli_query($conn,$sql);
 
 if(mysqli_num_rows($result) == 1) {
   $_SESSION['Email'] = $email;
+  
+  $sql = "SELECT ID FROM users WHERE Email='$email'";
+  $result = mysqli_query($conn,$sql);
+  $_SESSION['UserID'] = $result->fetch_row()[0];
+
   header("location:http://localhost:8080/HDS/index.php");
 } else {
   header("location:http://localhost:8080/HDS/index.php");
