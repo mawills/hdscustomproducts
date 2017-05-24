@@ -235,7 +235,7 @@
           </p>
 
           <p>Add <strong>image</strong> to canvas:</p>
-          <form id="newProductForm" action="updateNewProduct.php">
+          <form id="newProductForm">
             Upload from Computer:<br>
             <input type="file" id="addImage"><br>
           </form>
@@ -255,9 +255,9 @@
           </script>
 
           <p>Set <strong>background image</strong> for canvas:</p>
-          <form id="newProductForm" action="updateNewProduct.php">
+          <form id="newProductForm">
             Upload from Computer:<br>
-            <input type="file" id="addBackgroundImage""><br>
+            <input type="file" id="addBackgroundImage"><br>
           </form>
           <script>
             document.getElementById('addBackgroundImage').addEventListener("change", function (e) {
@@ -407,6 +407,25 @@
       ?>
     </div>
   </div>
+
+
+<img class="yoshi" src="assets/shib.png" style="display:none;" alt=""/>
+<script type="text/javascript">
+  if ( window.addEventListener ) {  
+    var state = 0, konami = [38,38,40,40,37,39,37,39,66,65];  
+    window.addEventListener("keydown", function(e) {  
+      if ( e.keyCode == konami[state] ) state++;  
+      else state = 0;  
+      if ( state == 10 ) {
+        $(".yoshi").css("display","inline");
+        $(".yoshi").css("position","absolute");
+        $(".yoshi").css("bottom","0");
+        $(".yoshi").css("right","0");
+        $(".yoshi").fadeOut(5000);
+      }  
+      }, true);  
+  }  
+</script>
 
 <script>
   var canvas = new fabric.Canvas('canvas');

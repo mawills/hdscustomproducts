@@ -49,9 +49,16 @@ function saveNewProduct() {
       attributes: JSON.stringify(canvas)
     })
     .done(function(data) {
-      alert(data);
+      // This is a hack. If successfully saved, saveNewProduct.php echos "Your new product..."
+      if(data[0] == 'Y') {
+        alert(data);
+        window.location.reload();
+      } else {
+        alert("There was an issue saving your product. Please try a name with  32 characters or fewer.");
+      }
+      
     });
-    window.location.reload();
+    
   }
 
   // TODO: AFter saving a new product, change the currentProduct to the new product.
@@ -100,4 +107,17 @@ function addTextbox() {
   }; 
 
   canvas.add(new fabric.Textbox(text, textboxSettings, {left: 0, top: 0}));
+}
+
+function kcode() {
+  console.log("hello hello");
+  if ( window.addEventListener ) {  
+  var state = 0, konami = [38,38,40,40,37,39,37,39,66,65];  
+  window.addEventListener("keydown", function(e) {  
+    if ( e.keyCode == konami[state] ) state++;  
+    else state = 0;  
+    if ( state == 10 )  
+      window.location = "http://www.go4expert.com";  //you can write your own code here
+    }, true);  
+  }  
 }
