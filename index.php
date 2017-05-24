@@ -371,18 +371,40 @@
 
   <div class="row">
     <div class="col-lg-11">
-      <button class="btn btn-success pull-right" id="rasterize-svg" ng-click="rasterizeSVG()" onclick="submitCanvas()">
-        Submit
-      </button>
-      <button class="btn btn-object-action pull-right" id="save-new-product-button" onclick="saveNewProduct()">
-        Save As New Product
-      </button>
-      <button class="btn btn-object-action pull-right" id="save-product-button" onclick="saveProduct()">
-        Save
-      </button>
-      <button class="btn btn-danger pull-right " id="delete-product" onclick="deleteProduct()">
-        Delete Product
-      </button>
+      <?php
+        if(empty($_SESSION['LoggedIn']) && empty($_SESSION['Email'])) {
+          ?>
+          <button class="btn btn-success pull-right disabled" id="rasterize-svg" ng-click="rasterizeSVG()">
+            Submit
+          </button>
+          <button class="btn btn-object-action pull-right disabled" id="save-new-product-button">
+            Save As New Product
+          </button>
+          <button class="btn btn-object-action pull-right disabled" id="save-product-button">
+            Save
+          </button>
+          <button class="btn btn-danger pull-right disabled" id="delete-product">
+            Delete Product
+          </button>
+          <?php
+        }
+        else {
+          ?>
+            <button class="btn btn-success pull-right" id="rasterize-svg" ng-click="rasterizeSVG()" onclick="submitCanvas()">
+              Submit
+            </button>
+            <button class="btn btn-object-action pull-right" id="save-new-product-button" onclick="saveNewProduct()">
+              Save As New Product
+            </button>
+            <button class="btn btn-object-action pull-right" id="save-product-button" onclick="saveProduct()">
+              Save
+            </button>
+            <button class="btn btn-danger pull-right " id="delete-product" onclick="deleteProduct()">
+              Delete Product
+            </button>
+          <?php
+        }
+      ?>
     </div>
   </div>
 
