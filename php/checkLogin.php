@@ -12,6 +12,7 @@ $result = mysqli_query($conn,$sql);
 
 if(mysqli_num_rows($result) == 1) {
   $_SESSION['Email'] = $email;
+  $_SESSION['LoggedIn'] = true;
   
   $sql = "SELECT ID FROM users WHERE Email='$email'";
   $result = mysqli_query($conn,$sql);

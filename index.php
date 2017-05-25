@@ -41,9 +41,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
 
-      <!-- Display login drop-down only if the user is not logged in -->
       <?php
-        if(empty($_SESSION['LoggedIn']) && empty($_SESSION['Email'])) {
+        if(empty($_SESSION['LoggedIn'])) {
           ?>
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
@@ -80,6 +79,7 @@
         </li>
         <?php
         }
+
         else {
           ?>
             <li>
@@ -87,7 +87,6 @@
             </li>
           <?php
         }
-
       ?>
 
       </ul>
@@ -310,13 +309,21 @@
             </div>
 
             <div style="margin-top:10px;">
-              <button id="send-backwards" class="btn btn-object-action" ng-click="sendBackwards()">Send backwards</button>
-              <button id="send-to-back" class="btn btn-object-action" ng-click="sendToBack()">Send to back</button>
+              <button id="send-backwards" class="btn btn-object-action" ng-click="sendBackwards()">
+                Send backwards
+              </button>
+              <button id="send-to-back" class="btn btn-object-action" ng-click="sendToBack()">
+                Send to back
+              </button>
             </div>
 
             <div style="margin-top:4px;">
-              <button id="bring-forward" class="btn btn-object-action" ng-click="bringForward()">Bring forwards</button>
-              <button id="bring-to-front" class="btn btn-object-action" ng-click="bringToFront()">Bring to front</button>
+              <button id="bring-forward" class="btn btn-object-action" ng-click="bringForward()">
+                Bring forwards
+              </button>
+              <button id="bring-to-front" class="btn btn-object-action" ng-click="bringToFront()">
+                Bring to front
+              </button>
             </div>
 
           </div>
@@ -372,7 +379,7 @@
   <div class="row">
     <div class="col-lg-11">
       <?php
-        if(empty($_SESSION['LoggedIn']) && empty($_SESSION['Email'])) {
+        if(empty($_SESSION['LoggedIn'])) {
           ?>
           <button class="btn btn-success pull-right disabled" id="rasterize-svg" ng-click="rasterizeSVG()">
             Submit
@@ -408,7 +415,6 @@
     </div>
   </div>
 
-
 <img class="yoshi" src="assets/shib.png" style="display:none;" alt=""/>
 <script type="text/javascript">
   if ( window.addEventListener ) {  
@@ -421,7 +427,7 @@
         $(".yoshi").css("position","absolute");
         $(".yoshi").css("bottom","0");
         $(".yoshi").css("right","0");
-        $(".yoshi").fadeOut(5000);
+        $(".yoshi").fadeOut(4000);
       }  
       }, true);  
   }  

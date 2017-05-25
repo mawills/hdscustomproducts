@@ -49,16 +49,15 @@ function saveNewProduct() {
       attributes: JSON.stringify(canvas)
     })
     .done(function(data) {
-      // This is a hack. If successfully saved, saveNewProduct.php echos "Your new product..."
+      // This is a hack. If successful, saveNewProduct.php echos "Your new product..."
       if(data[0] == 'Y') {
         alert(data);
         window.location.reload();
       } else {
-        alert("There was an issue saving your product. Please try a name with  32 characters or fewer.");
+        alert("There was an issue saving your product. Please try a name with 32 characters or fewer.");
       }
       
     });
-    
   }
 
   // TODO: AFter saving a new product, change the currentProduct to the new product.
