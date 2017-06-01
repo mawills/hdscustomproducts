@@ -129,14 +129,14 @@
       ?>
       </select>
       </form>
-      <div id="productFields"></div>      
+      <div id="productFields"></div>
     </div>
 </div>
   <div id="bd-wrapper" ng-controller="CanvasControls">
 
     <div style="position:relative;width:704px;float:left;" id="canvas-wrapper">
 
-      <canvas id="canvas" style="border:2px solid #000000;"></canvas>
+      <canvas id="canvas"></canvas>
 
       <div id="color-opacity-controls" ng-show="canvas.getActiveObject()">
         <label for="opacity">Opacity: </label>

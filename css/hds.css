@@ -2,6 +2,10 @@
     border: 1px solid black;
 }
 
+#bd-wrapper {
+    margin-left: 15px;
+}
+
 #global-controls {
     margin-top:4px;
 }
