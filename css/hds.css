@@ -1,5 +1,7 @@
-#c {
-    border: 1px solid black;
+.upper-canvas,
+.lower-canvas {
+    border: 1px solid #ddd;
+    padding-bottom: 1px;
 }
 
 #bd-wrapper {
@@ -24,7 +26,6 @@
 #navbar-logo {
     height: 100%;
 }
-
 
 /* */
 #login-dp {

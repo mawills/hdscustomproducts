@@ -88,7 +88,7 @@
     <?php
     if(!empty($_POST['email']) && !empty($_POST['password'])) {
       $salt = "Yoshiba the red Shiba Inu";
-      $email = mysqli_real_escape_string($conn,$_POST['email']);
+      $email = stripslashes(mysqli_real_escape_string($conn,$_POST['email']));
       $password = hash('sha256',hash('md5',hash('md5',$salt.$_POST['password']) . hash('sha256',$salt.$_POST['password'])));
 
       $checkUserExists = mysqli_query($conn,"SELECT * FROM users WHERE Email = '".$email."'");

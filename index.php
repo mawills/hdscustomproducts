@@ -58,7 +58,7 @@
                     <div class="form-group">
                      <label for="password" class="sr-only">Password</label>
                      <input name="password" type="password" class="form-control" id="password" placeholder="Password" required>
-                     <div class="help-block text-right"><a href="">Forget the password ?</a></div>
+                     <div class="help-block text-right"><a href="">Forget the password?</a></div>
                     </div>
                     <div class="form-group">
                       <button type="submit" id="sign-in-button" class="btn btn-primary btn-block">Sign in</button>

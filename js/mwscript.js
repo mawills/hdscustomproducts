@@ -36,6 +36,10 @@ function scaleCanvasSizeAndBackgroundImage(oImg) {
   }
 }
 
+String.prototype.escapeNewlineChars = function() {
+  return this.replace(/\\/g, "\\\\");
+}
+
 // Adds a new product to the database
 function saveNewProduct() {
   var name = prompt("Please enter a name for your product");
@@ -46,10 +50,10 @@ function saveNewProduct() {
     $.post("php/saveNewProduct.php",
     {
       name: name,
-      attributes: JSON.stringify(canvas)
+      attributes: JSON.stringify(canvas).escapeNewlineChars()
     })
     .done(function(data) {
-      // This is a hack. If successful, saveNewProduct.php echos "Your new product..."
+      // HACK: If successful, saveNewProduct.php echos "Your new product..."
       if(data[0] == 'Y') {
         alert(data);
         window.location.reload();
@@ -68,7 +72,7 @@ function saveProduct() {
   $.post("php/saveProduct.php", 
     {
       id: currentProduct, 
-      attributes: JSON.stringify(canvas)
+      attributes: JSON.stringify(canvas).escapeNewlineChars()
     })
     .done(function(data) {
       alert(data);
@@ -107,3 +111,4 @@ function addTextbox() {
 
   canvas.add(new fabric.Textbox(text, textboxSettings, {left: 0, top: 0}));
 }
+
