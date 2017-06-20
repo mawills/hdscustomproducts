@@ -15,6 +15,7 @@ function setupProductCanvas(productID) {
     $.get("php/setupProductCanvas.php?id="+productID, function(data) {
       canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
     });
+    canvasModified = false;
   }
   else
   {
@@ -25,6 +26,7 @@ function setupProductCanvas(productID) {
       $.get("php/setupProductCanvas.php?id="+productID, function(data) {
         canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
       });
+      canvasModified = false;
     }
   }
 }
