@@ -1,17 +1,32 @@
 var CANVAS_MAX_WIDTH = 700;
 var CANVAS_MAX_HEIGHT = 600;
 var currentProduct = 0;
+var canvasModified = false;
 
 // Updates the canvas with the selected product image and placeholder text/images
 function setupProductCanvas(productID) {
-  currentProduct = productID;
   if (productID=="") {
     return; 
   }
-  canvas.clear();
-  $.get("php/setupProductCanvas.php?id="+productID, function(data) {
-    canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
-  });
+  if(!canvasModified)
+  {
+    currentProduct = productID;
+    canvas.clear();
+    $.get("php/setupProductCanvas.php?id="+productID, function(data) {
+      canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
+    });
+  }
+  else
+  {
+    if(confirm("Unsaved changes will be lost. Proceed?"))
+    {
+      currentProduct = productID;
+      canvas.clear();
+      $.get("php/setupProductCanvas.php?id="+productID, function(data) {
+        canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
+      });
+    }
+  }
 }
 
 // Resizes the canvas to fit the background image, unless the background image is > max dimensions, instead scales background image
@@ -112,3 +127,12 @@ function addTextbox() {
   canvas.add(new fabric.Textbox(text, textboxSettings, {left: 0, top: 0}));
 }
 
+// Updates canvasModified to display a warning before discarding unsaved chenges to a product
+function canvasObjectMoveHandler() {
+  canvasModified = true;
+};
+function canvasObjectModifiedHandler() {
+  canvasModified = true;
+};
+canvas.on('object:moving', canvasObjectMoveHandler);
+canvas.on('object:modified', canvasObjectModifiedHandler);

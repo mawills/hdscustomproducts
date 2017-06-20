@@ -107,7 +107,7 @@
   <div class="col-lg-4 col-lg-offset-1">
       <h2>Select Product: </h2>
       <form>
-      <select name="products" onchange="setupProductCanvas(this.value)">
+      <select name="products" onchange="setupProductCanvas(this.value, JSON.stringify(canvas))">
       <option value="">Choose a Product Below...</option>
       <?php
         $userID = intval($_SESSION['UserID']);
