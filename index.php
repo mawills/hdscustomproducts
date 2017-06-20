@@ -94,7 +94,6 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <h1 class="text-center">HDS Custom Products</h1>
@@ -107,7 +106,7 @@
   <div class="col-lg-4 col-lg-offset-1">
       <h2>Select Product: </h2>
       <form>
-      <select name="products" onchange="setupProductCanvas(this.value, JSON.stringify(canvas))">
+      <select name="products" onchange="setupProductCanvas(this.value)">
       <option value="">Choose a Product Below...</option>
       <?php
         $userID = intval($_SESSION['UserID']);
@@ -378,40 +377,20 @@
 
   <div class="row">
     <div class="col-lg-11">
-      <?php
-        if(empty($_SESSION['LoggedIn'])) {
-          ?>
-          <button class="btn btn-success pull-right disabled" id="rasterize-svg" ng-click="rasterizeSVG()">
-            Submit
-          </button>
-          <button class="btn btn-object-action pull-right disabled" id="save-new-product-button">
-            Save As New Product
-          </button>
-          <button class="btn btn-object-action pull-right disabled" id="save-product-button">
-            Save
-          </button>
-          <button class="btn btn-danger pull-right disabled" id="delete-product">
-            Delete Product
-          </button>
-          <?php
-        }
-        else {
-          ?>
-            <button class="btn btn-success pull-right" id="rasterize-svg" ng-click="rasterizeSVG()" onclick="submitCanvas()">
-              Submit
-            </button>
-            <button class="btn btn-object-action pull-right" id="save-new-product-button" onclick="saveNewProduct()">
-              Save As New Product
-            </button>
-            <button class="btn btn-object-action pull-right" id="save-product-button" onclick="saveProduct()">
-              Save
-            </button>
-            <button class="btn btn-danger pull-right " id="delete-product" onclick="deleteProduct()">
-              Delete Product
-            </button>
-          <?php
-        }
-      ?>
+
+      <button class="btn btn-success pull-right disabled" id="rasterize-svg" ng-click="rasterizeSVG()" onclick="submitCanvas()">
+        Submit
+      </button>
+      <button class="btn btn-object-action pull-right disabled" id="save-new-product-button" onclick="saveNewProduct()">
+        Save As New Product
+      </button>
+      <button class="btn btn-object-action pull-right disabled" id="save-product-button" onclick="saveProduct()">
+        Save
+      </button>
+      <button class="btn btn-danger pull-right disabled" id="delete-product" onclick="deleteProduct()">
+        Delete Product
+      </button>
+
     </div>
   </div>
 

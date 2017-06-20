@@ -15,7 +15,6 @@ function setupProductCanvas(productID) {
     $.get("php/setupProductCanvas.php?id="+productID, function(data) {
       canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
     });
-    canvasModified = false;
   }
   else
   {
@@ -29,6 +28,11 @@ function setupProductCanvas(productID) {
       canvasModified = false;
     }
   }
+
+  $("#save-product-button").addClass("disabled");
+  $("#rasterize-svg").removeClass("disabled");
+  $("#delete-product").removeClass("disabled");
+  $("#save-new-product-button").removeClass("disabled");
 }
 
 // Resizes the canvas to fit the background image, unless the background image is > max dimensions, instead scales background image
@@ -80,12 +84,15 @@ function saveNewProduct() {
       
     });
   }
-
+  
   // TODO: AFter saving a new product, change the currentProduct to the new product.
 }
 
 // Saves the changes to a product after a user edits it
 function saveProduct() {
+  if(currentProduct == 0)
+    return alert("Please select a product or save a new product before saving.");
+
   $.post("php/saveProduct.php", 
     {
       id: currentProduct, 
@@ -94,6 +101,9 @@ function saveProduct() {
     .done(function(data) {
       alert(data);
     });
+
+  canvasModified = false;
+  $("#save-product-button").addClass("disabled");
 }
 
 // Removes a product from the database
@@ -130,11 +140,12 @@ function addTextbox() {
 }
 
 // Updates canvasModified to display a warning before discarding unsaved chenges to a product
-function canvasObjectMoveHandler() {
+function canvasObjectEventHandler() {
   canvasModified = true;
+  $("#save-product-button").removeClass("disabled");
+  $("#save-new-product-button").removeClass("disabled");
 };
-function canvasObjectModifiedHandler() {
-  canvasModified = true;
-};
-canvas.on('object:moving', canvasObjectMoveHandler);
-canvas.on('object:modified', canvasObjectModifiedHandler);
+canvas.on('object:selected', canvasObjectEventHandler);
+canvas.on('object:removed', canvasObjectEventHandler);
+canvas.on('object:moving', canvasObjectEventHandler);
+canvas.on('object:modified', canvasObjectEventHandler);
