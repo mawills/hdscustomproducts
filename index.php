@@ -102,35 +102,43 @@
 <div class="row">
   <p class="text-center">The HDS Custom Produects web app is a quick and simple way to create product mock-ups and proofs to share with your HDS sales rep.</p>
 </div>
-<div class="row">
-  <div class="col-lg-4 col-lg-offset-1">
-      <h2>Select Product: </h2>
-      <form>
-      <select name="products" onchange="setupProductCanvas(this.value)">
-      <option value="">Choose a Product Below...</option>
-      <?php
-        $userID = intval($_SESSION['UserID']);
-        $products = "SELECT * FROM products WHERE UserID = '$userID'";
-        if($userID == 14) {
-          $products = "SELECT * FROM products";
-        }
-        $result = $conn->query($products);
 
-        echo $products;
+<?php
+  if(!empty($_SESSION['LoggedIn'])) {
+    ?>
+      <div class="row">
+        <div class="col-lg-4 col-lg-offset-1">
+            <h2>Select Product: </h2>
+            <form>
+            <select name="products" onchange="setupProductCanvas(this.value)">
+            <option value="">Choose a Product Below...</option>
+            <?php
+              $userID = intval($_SESSION['UserID']);
+              $products = "SELECT * FROM products WHERE UserID = '$userID'";
+              if($userID == 14) {
+                $products = "SELECT * FROM products";
+              }
+              $result = $conn->query($products);
 
-        if ($result->num_rows > 0) {
-            $menu = "";
-            while($row = $result->fetch_assoc()) {
-              $menu .= '<option value="' . $row["ID"] . '">' . $row["Name"] . '</option>';
-            }
-        }
-        echo $menu;  
-      ?>
-      </select>
-      </form>
-      <div id="productFields"></div>
-    </div>
-</div>
+              echo $products;
+
+              if ($result->num_rows > 0) {
+                  $menu = "";
+                  while($row = $result->fetch_assoc()) {
+                    $menu .= '<option value="' . $row["ID"] . '">' . $row["Name"] . '</option>';
+                  }
+              }
+              echo $menu;  
+            ?>
+            </select>
+            </form>
+            <div id="productFields"></div>
+          </div>
+      </div>
+  <?php
+  }
+  ?>
+
   <div id="bd-wrapper" ng-controller="CanvasControls">
 
     <div style="position:relative;width:704px;float:left;" id="canvas-wrapper">
@@ -366,11 +374,8 @@
 
           </div>
         </div>
-
       </div>
-
     </div>
-
   </div>
 
   <hr>

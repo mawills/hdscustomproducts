@@ -84,8 +84,6 @@ function saveNewProduct() {
       
     });
   }
-  
-  // TODO: AFter saving a new product, change the currentProduct to the new product.
 }
 
 // Saves the changes to a product after a user edits it
@@ -139,7 +137,9 @@ function addTextbox() {
   canvas.add(new fabric.Textbox(text, textboxSettings, {left: 0, top: 0}));
 }
 
-// Updates canvasModified to display a warning before discarding unsaved chenges to a product
+// Event handler for when the canvas has been modified
+// Displays warning message when discarding unsaved changes
+// Updates save/save new/delete/submit buttons
 function canvasObjectEventHandler() {
   canvasModified = true;
   $("#save-product-button").removeClass("disabled");
