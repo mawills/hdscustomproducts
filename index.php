@@ -92,50 +92,49 @@
   </div>
 </nav>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <h1 class="text-center">HDS Custom Products</h1>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h1 class="text-center">HDS Custom Products</h1>
+    </div>
   </div>
-</div>
-<div class="row">
-  <p class="text-center">The HDS Custom Produects web app is a quick and simple way to create product mock-ups and proofs to share with your HDS sales rep.</p>
-</div>
+  <div class="row">
+    <p class="text-center">The HDS Custom Produects web app is a quick and simple way to create product mock-ups and proofs to share with your HDS sales rep.</p>
+  </div>
 
-<?php
-  if(!empty($_SESSION['LoggedIn'])) {
-    ?>
-      <div class="row">
-        <div class="col-lg-4 col-lg-offset-1">
-            <h2>Select Product: </h2>
-            <form>
-            <select name="products" onchange="setupProductCanvas(this.value)">
-            <option value="">Choose a Product Below...</option>
-            <?php
-              $userID = intval($_SESSION['UserID']);
-              $products = "SELECT * FROM products WHERE UserID = '$userID'";
-              if($userID == 14) {
-                $products = "SELECT * FROM products";
-              }
-              $result = $conn->query($products);
-
-              echo $products;
-
-              if ($result->num_rows > 0) {
-                  $menu = "";
-                  while($row = $result->fetch_assoc()) {
-                    $menu .= '<option value="' . $row["ID"] . '">' . $row["Name"] . '</option>';
-                  }
-              }
-              echo $menu;  
-            ?>
-            </select>
-            </form>
-            <div id="productFields"></div>
-          </div>
-      </div>
   <?php
-  }
+  if(!empty($_SESSION['LoggedIn'])) {
   ?>
+
+  <div class="row">
+    <div class="col-lg-4 col-lg-offset-1">
+        <h2>Select Product: </h2>
+        <form>
+        <select name="products" onchange="setupProductCanvas(this.value)">
+        <option value="">Choose a Product Below...</option>
+        <?php
+          $userID = intval($_SESSION['UserID']);
+          $products = "SELECT * FROM products WHERE UserID = '$userID'";
+          if($userID == 14) {
+            $products = "SELECT * FROM products";
+          }
+          $result = $conn->query($products);
+
+          echo $products;
+
+          if ($result->num_rows > 0) {
+              $menu = "";
+              while($row = $result->fetch_assoc()) {
+                $menu .= '<option value="' . $row["ID"] . '">' . $row["Name"] . '</option>';
+              }
+          }
+          echo $menu;  
+        ?>
+        </select>
+        </form>
+        <div id="productFields"></div>
+      </div>
+  </div>
+
 
   <div id="bd-wrapper" ng-controller="CanvasControls">
 
@@ -400,6 +399,28 @@
 
     </div>
   </div>
+
+
+  <?php
+  } else { ?>
+
+    <div class="row">
+      <div class="row-lg-12 text-center">
+        <h2>Log in or create an account to continue!</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-lg-12 text-center contact-us">
+        <hr>
+        <h2>Need help?</h2>
+        <p>Contact us at <a href="mailto:mwills@hdsideas.com">mwills@hdsideas.com</a></p>
+      </div>
+    </div>
+  <?php
+  }
+  ?>
+
+
 
 <img class="yoshi" src="assets/shib.png" style="display:none;" alt=""/>
 <script type="text/javascript">

@@ -42,6 +42,12 @@
     margin-bottom: 30px;
 }
 
+.contact-us {
+    position: fixed;
+    bottom:0;
+    width: 100%;
+}
+
 /* */
 #login-dp {
     min-width: 250px;
