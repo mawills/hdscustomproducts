@@ -119,9 +119,12 @@ function deleteProduct() {
 }
 
 // Called when user submits design. Exports the content of the canvas to SVG format and displays it
-// TODO: Also emails a copy of the SVG to an HDS employee
 function submitCanvas() {
   window.open("data:image/svg+xml;utf8," + canvas.toSVG());
+  $.post("php/submitProduct.php",
+    {
+      data: canvas.toSVG()
+    })
 }
 
 function addTextbox() {

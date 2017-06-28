@@ -8,6 +8,12 @@
     margin-left: 15px;
 }
 
+#canvas-wrapper {
+    position: relative;
+    width: 704px;
+    float: left;
+}
+
 #global-controls {
     margin-top:4px;
 }
@@ -25,6 +31,15 @@
 
 #navbar-logo {
     height: 100%;
+}
+
+#simple-shapes {
+    margin-top: 10px;
+}
+
+#drawing-mode-wrapper {
+    margin-top: 10px; 
+    margin-bottom: 30px;
 }
 
 /* */
@@ -51,8 +66,8 @@
 }
 
 #sign-in-button {
-    background-color: #e51937;
-    border-color: red;
+    background-color: #d9534f;
+    border-color: #d43f3a;
 }
 
 @media(max-width:768px) {

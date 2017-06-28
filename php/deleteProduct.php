@@ -10,4 +10,4 @@ if(!$result) {
     die("There was an error while deleting the product: " + mysql_error());
 }
 echo "The product has been removed.";
-header("location:http://localhost:8080/HDS/index.php");
+header("location:http://192.168.1.118:8080/HDS/index.php");

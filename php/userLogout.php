@@ -5,4 +5,4 @@
   unset($_SESSION["Password"]);
   session_destroy();
    
-  header("location:http://localhost:8080/HDS/index.php");
+  header("location:http://192.168.1.118:8080/HDS/index.php");

@@ -24,7 +24,6 @@
 
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
@@ -32,12 +31,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="http://localhost:8080/HDS/index.php#">
+      <a class="navbar-brand" href="http://192.168.1.118:8080/HDS/index.php#">
         <img id="navbar-logo" src="assets/logo.png">
       </a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
 
@@ -71,7 +69,7 @@
                  </form>
                 </div>
                 <div class="bottom text-center">
-                  Don't have an account? <a href="http://localhost:8080/HDS/register.php"><b>Create one.</b></a>
+                  Don't have an account? <a href="http://192.168.1.118:8080/HDS/register.php"><b>Create one.</b></a>
                 </div>
              </div>
             </li>
@@ -83,15 +81,15 @@
         else {
           ?>
             <li>
-              <a href="http://localhost:8080/HDS/php/userLogout.php">Logout</a>
+              <a href="http://192.168.1.118:8080/HDS/php/userLogout.php">Logout</a>
             </li>
           <?php
         }
       ?>
 
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>
 
 <div class="row">
@@ -141,7 +139,7 @@
 
   <div id="bd-wrapper" ng-controller="CanvasControls">
 
-    <div style="position:relative;width:704px;float:left;" id="canvas-wrapper">
+    <div id="canvas-wrapper">
 
       <canvas id="canvas"></canvas>
 
@@ -218,13 +216,13 @@
     <div id="commands" ng-click="maybeLoadShape($event)">
 
       <ul class="nav nav-tabs">
-        <li><a href="#simple-shapes" data-toggle="tab">Text / Images</a></li>
-        <li class="active"><a href="#object-controls-pane" data-toggle="tab">Controls</a></li>
+        <li class="active"><a href="#simple-shapes" data-toggle="tab">Text / Images</a></li>
+        <li><a href="#object-controls-pane" data-toggle="tab">Controls</a></li>
       </ul>
 
       <div class="tab-content">
 
-        <div class="tab-pane" id="simple-shapes">
+        <div class="tab-pane active" id="simple-shapes">
 
           <p>Add <strong>text</strong> to canvas:</p>
           <p>
@@ -240,7 +238,39 @@
             <button type="button" class="btn polygon" ng-click="addPolygon()">Polygon</button>
           </p>
 
-          <p>Add <strong>image</strong> to canvas:</p>
+          <div id="drawing-mode-wrapper">
+
+            <button id="drawing-mode" class="btn btn-info" ng-click="setFreeDrawingMode(!getFreeDrawingMode())" ng-class="{'btn-inverse': getFreeDrawingMode()}">
+              {[ getFreeDrawingMode() ? 'Exit free drawing mode' : 'Enter free drawing mode' ]}
+            </button>
+
+            <div id="drawing-mode-options" ng-show="getFreeDrawingMode()">
+              <label for="drawing-mode-selector">Mode:</label>
+              <select id="drawing-mode-selector" bind-value-to="drawingMode">
+                <option>Pencil</option>
+                <option>Circle</option>
+                <option>Spray</option>
+                <option>Pattern</option>
+                <option>hline</option>
+                <option>vline</option>
+                <option>square</option>
+                <option>diamond</option>
+                <option>texture</option>
+              </select>
+              <br>
+              <label for="drawing-line-width">Line width:</label>
+              <input type="range" value="30" min="0" max="150" bind-value-to="drawingLineWidth">
+              <br>
+              <label for="drawing-color">Line color:</label>
+              <input type="color" value="#005E7A" bind-value-to="drawingLineColor">
+              <br>
+              <label for="drawing-shadow-width">Line shadow width:</label>
+              <input type="range" value="0" min="0" max="50" bind-value-to="drawingLineShadowWidth">
+            </div>
+
+          </div>
+
+          <p>Add <strong>images or logos</strong> to canvas:</p>
           <form id="newProductForm">
             Upload from Computer:<br>
             <input type="file" id="addImage"><br>
@@ -260,7 +290,7 @@
             });
           </script>
 
-          <p>Set <strong>background image</strong> for canvas:</p>
+          <p>Set <strong>blank product image</strong> for canvas:</p>
           <form id="newProductForm">
             Upload from Computer:<br>
             <input type="file" id="addBackgroundImage"><br>
@@ -284,13 +314,13 @@
 
         </div>
 
-        <div class="tab-pane active" id="object-controls-pane">
+        <div class="tab-pane" id="object-controls-pane">
           <div class="object-controls" object-buttons-enabled="getSelected()">
 
             <div style="margin-top:10px;">
               <p>
                 <button class="btn btn-danger" id="remove-selected" ng-click="removeSelected()">
-                  Remove selected object/group
+                  Delete selected text/image
                 </button>
               </p>
 
@@ -334,35 +364,7 @@
             </div>
 
           </div>
-          <div style="margin-top:10px;" id="drawing-mode-wrapper">
-
-            <button id="drawing-mode" class="btn btn-info" ng-click="setFreeDrawingMode(!getFreeDrawingMode())" ng-class="{'btn-inverse': getFreeDrawingMode()}">
-              {[ getFreeDrawingMode() ? 'Exit free drawing mode' : 'Enter free drawing mode' ]}
-            </button>
-
-            <div id="drawing-mode-options" ng-show="getFreeDrawingMode()">
-              <label for="drawing-mode-selector">Mode:</label>
-              <select id="drawing-mode-selector" bind-value-to="drawingMode">
-                <option>Pencil</option>
-                <option>Circle</option>
-                <option>Spray</option>
-                <option>Pattern</option>
-                <option>hline</option>
-                <option>vline</option>
-                <option>square</option>
-                <option>diamond</option>
-                <option>texture</option>
-              </select>
-              <br>
-              <label for="drawing-line-width">Line width:</label>
-              <input type="range" value="30" min="0" max="150" bind-value-to="drawingLineWidth">
-              <br>
-              <label for="drawing-color">Line color:</label>
-              <input type="color" value="#005E7A" bind-value-to="drawingLineColor">
-              <br>
-              <label for="drawing-shadow-width">Line shadow width:</label>
-              <input type="range" value="0" min="0" max="50" bind-value-to="drawingLineShadowWidth">
-            </div>
+          <div id="drawing-mode-wrapper">
 
             <div id="global-controls" style="margin-top:10px;">
               <p>
@@ -384,7 +386,7 @@
     <div class="col-lg-11">
 
       <button class="btn btn-success pull-right disabled" id="rasterize-svg" ng-click="rasterizeSVG()" onclick="submitCanvas()">
-        Submit
+        Export Mock-Up
       </button>
       <button class="btn btn-object-action pull-right disabled" id="save-new-product-button" onclick="saveNewProduct()">
         Save As New Product
