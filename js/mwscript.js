@@ -1,18 +1,18 @@
 var CANVAS_MAX_WIDTH = 700;
 var CANVAS_MAX_HEIGHT = 600;
-var currentProduct = 0;
+var currentImage = 0;
 var canvasModified = false;
 
-// Updates the canvas with the selected product image and placeholder text/images
-function setupProductCanvas(productID) {
-  if (productID=="") {
+// Updates the canvas with the selected image image and placeholder text/images
+function setupCanvas(imageID) {
+  if (imageID=="") {
     return; 
   }
   if(!canvasModified)
   {
-    currentProduct = productID;
+    currentImage = imageID;
     canvas.clear();
-    $.get("php/setupProductCanvas.php?id="+productID, function(data) {
+    $.get("php/setupCanvas.php?id="+imageID, function(data) {
       canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
     });
   }
@@ -20,19 +20,19 @@ function setupProductCanvas(productID) {
   {
     if(confirm("Unsaved changes will be lost. Proceed?"))
     {
-      currentProduct = productID;
+      currentImage = imageID;
       canvas.clear();
-      $.get("php/setupProductCanvas.php?id="+productID, function(data) {
+      $.get("php/setupCanvas.php?id="+imageID, function(data) {
         canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
       });
       canvasModified = false;
     }
   }
 
-  $("#save-product-button").addClass("disabled");
+  $("#save-image-button").addClass("disabled");
   $("#rasterize-svg").removeClass("disabled");
-  $("#delete-product").removeClass("disabled");
-  $("#save-new-product-button").removeClass("disabled");
+  $("#delete-image").removeClass("disabled");
+  $("#save-new-image-button").removeClass("disabled");
 }
 
 // Resizes the canvas to fit the background image, unless the background image is > max dimensions, instead scales background image
@@ -61,39 +61,37 @@ String.prototype.escapeNewlineChars = function() {
   return this.replace(/\\/g, "\\\\");
 }
 
-// Adds a new product to the database
-function saveNewProduct() {
-  var name = prompt("Please enter a name for your product");
+function saveNewImage() {
+  var name = prompt("Please enter a name for your image");
   while(name == "") {
-    name = prompt("A name is required to save your product. Please choose a name.");
+    name = prompt("A name is required to save your image. Please choose a name.");
   }
   if(name != null) {
-    $.post("php/saveNewProduct.php",
+    $.post("php/saveNewImage.php",
     {
       name: name,
       attributes: JSON.stringify(canvas).escapeNewlineChars()
     })
     .done(function(data) {
-      // HACK: If successful, saveNewProduct.php echos "Your new product..."
+      // HACK: If successful, saveNewImage.php echos "Your new image..."
       if(data[0] == 'Y') {
         alert(data);
         window.location.reload();
       } else {
-        alert("There was an issue saving your product. Please try a name with 32 characters or fewer.");
+        alert("There was an issue saving your image. Please try a name with 32 characters or fewer.");
       }
       
     });
   }
 }
 
-// Saves the changes to a product after a user edits it
-function saveProduct() {
-  if(currentProduct == 0)
-    return alert("Please select a product or save a new product before saving.");
+function saveImage() {
+  if(currentImage == 0)
+    return alert("Please select an image or save a new image before saving.");
 
-  $.post("php/saveProduct.php", 
+  $.post("php/saveImage.php", 
     {
-      id: currentProduct, 
+      id: currentImage, 
       attributes: JSON.stringify(canvas).escapeNewlineChars()
     })
     .done(function(data) {
@@ -101,15 +99,14 @@ function saveProduct() {
     });
 
   canvasModified = false;
-  $("#save-product-button").addClass("disabled");
+  $("#save-image-button").addClass("disabled");
 }
 
-// Removes a product from the database
-function deleteProduct() {
+function deleteImage() {
   if(confirm("Are you sure?")) {
-    $.post("php/deleteProduct.php", 
+    $.post("php/deleteImage.php", 
     {
-      id: currentProduct, 
+      id: currentImage, 
     })
     .done(function(data) {
       alert(data);
@@ -121,7 +118,7 @@ function deleteProduct() {
 // Called when user submits design. Exports the content of the canvas to SVG format and displays it
 function submitCanvas() {
   window.open("data:image/svg+xml;utf8," + canvas.toSVG());
-  $.post("php/submitProduct.php",
+  $.post("php/submitImage.php",
     {
       data: canvas.toSVG()
     })
@@ -145,8 +142,8 @@ function addTextbox() {
 // Updates save/save new/delete/submit buttons
 function canvasObjectEventHandler() {
   canvasModified = true;
-  $("#save-product-button").removeClass("disabled");
-  $("#save-new-product-button").removeClass("disabled");
+  $("#save-image-button").removeClass("disabled");
+  $("#save-new-image-button").removeClass("disabled");
 };
 canvas.on('object:selected', canvasObjectEventHandler);
 canvas.on('object:removed', canvasObjectEventHandler);

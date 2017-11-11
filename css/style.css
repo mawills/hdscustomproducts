@@ -19,9 +19,9 @@
 }
 
 #rasterize-svg,
-#save-new-product-button,
-#save-product-button,
-#delete-product {
+#save-new-image-button,
+#save-image-button,
+#delete-image {
     margin: 0 4px;
 }
 

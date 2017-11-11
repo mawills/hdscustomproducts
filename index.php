@@ -2,7 +2,6 @@
 <html lang="en" ng-app="kitchensink">
 <head>
 <title>Canvas Demo</title>
-<link rel="icon" href="assets/icon.png" type="image/x-icon">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/kitchensink.css" rel="stylesheet">
@@ -32,7 +31,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="http://192.168.1.118:8080/HDS/index.php#">
-        <img id="navbar-logo" src="assets/logo.png">
+        Image Canvas Demo
       </a>
     </div>
 
@@ -94,11 +93,11 @@
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center">HDS Custom Products</h1>
+      <h1 class="text-center">Image Creator Demo</h1>
     </div>
   </div>
   <div class="row">
-    <p class="text-center">The HDS Custom Produects web app is a quick and simple way to create product mock-ups and proofs to share with your HDS sales rep.</p>
+    <p class="text-center">This web app is a quick and simple way to create images and drawings and export them as vector art.</p>
   </div>
 
   <?php
@@ -107,19 +106,19 @@
 
   <div class="row">
     <div class="col-lg-4 col-lg-offset-1">
-        <h2>Select Product: </h2>
+        <h2>Select Image: </h2>
         <form>
-        <select name="products" onchange="setupProductCanvas(this.value)">
-        <option value="">Choose a Product Below...</option>
+        <select name="images" onchange="setupCanvas(this.value)">
+        <option value="">Choose an Image Below...</option>
         <?php
           $userID = intval($_SESSION['UserID']);
-          $products = "SELECT * FROM products WHERE UserID = '$userID'";
+          $images = "SELECT * FROM images WHERE UserID = '$userID'";
           if($userID == 14) {
-            $products = "SELECT * FROM products";
+            $images = "SELECT * FROM images";
           }
-          $result = $conn->query($products);
+          $result = $conn->query($images);
 
-          echo $products;
+          echo $images;
 
           if ($result->num_rows > 0) {
               $menu = "";
@@ -131,7 +130,7 @@
         ?>
         </select>
         </form>
-        <div id="productFields"></div>
+        <div id="imageFields"></div>
       </div>
   </div>
 
@@ -270,7 +269,7 @@
           </div>
 
           <p>Add <strong>images or logos</strong> to canvas:</p>
-          <form id="newProductForm">
+          <form id="newImageForm">
             Upload from Computer:<br>
             <input type="file" id="addImage"><br>
           </form>
@@ -289,8 +288,8 @@
             });
           </script>
 
-          <p>Set <strong>blank product image</strong> for canvas:</p>
-          <form id="newProductForm">
+          <p>Set <strong>background image</strong> for canvas:</p>
+          <form id="newImageForm">
             Upload from Computer:<br>
             <input type="file" id="addBackgroundImage"><br>
           </form>
@@ -385,16 +384,16 @@
     <div class="col-lg-11">
 
       <button class="btn btn-success pull-right disabled" id="rasterize-svg" ng-click="rasterizeSVG()" onclick="submitCanvas()">
-        Export Mock-Up
+        Export Vector Art
       </button>
-      <button class="btn btn-object-action pull-right disabled" id="save-new-product-button" onclick="saveNewProduct()">
-        Save As New Product
+      <button class="btn btn-object-action pull-right disabled" id="save-new-image-button" onclick="saveNewImage()">
+        Save As New Image
       </button>
-      <button class="btn btn-object-action pull-right disabled" id="save-product-button" onclick="saveProduct()">
+      <button class="btn btn-object-action pull-right disabled" id="save-image-button" onclick="saveImage()">
         Save
       </button>
-      <button class="btn btn-danger pull-right disabled" id="delete-product" onclick="deleteProduct()">
-        Delete Product
+      <button class="btn btn-danger pull-right disabled" id="delete-image" onclick="deleteImage()">
+        Delete Image
       </button>
 
     </div>
@@ -413,7 +412,7 @@
       <div class="row-lg-12 text-center contact-us">
         <hr>
         <h2>Need help?</h2>
-        <p>Contact us at <a href="mailto:mwills@hdsideas.com">mwills@hdsideas.com</a></p>
+        <p>Contact us at <a href="mailto:wattmills@gmail.com">wattmills@gmail.com</a></p>
       </div>
     </div>
   <?php

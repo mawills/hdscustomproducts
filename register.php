@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <title>Create a New Account</title>
-<link rel="icon" href="assets/icon.png" type="image/x-icon">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
@@ -22,7 +21,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="http://http://192.168.1.118:8080/HDS/index.php#">
-          <img id="navbar-logo" src="assets/logo.png">
+          Image Canvas Demo
         </a>
       </div>
 
