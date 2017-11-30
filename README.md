@@ -1,1 +1,1 @@
-Currently built to test/run on localhost, so requires LAMP/WAMP or something similar.
+This is a development build hosted on a local WAMP server.
