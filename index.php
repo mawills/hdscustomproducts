@@ -30,7 +30,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="http://192.168.1.118:8080/HDS/index.php#">
+      <a class="navbar-brand" href="./index.php#">
         Image Canvas Demo
       </a>
     </div>
@@ -68,7 +68,7 @@
                  </form>
                 </div>
                 <div class="bottom text-center">
-                  Don't have an account? <a href="http://192.168.1.118:8080/HDS/register.php"><b>Create one.</b></a>
+                  Don't have an account? <a href="./register.php"><b>Create one.</b></a>
                 </div>
              </div>
             </li>
@@ -80,7 +80,7 @@
         else {
           ?>
             <li>
-              <a href="http://192.168.1.118:8080/HDS/php/userLogout.php">Logout</a>
+              <a href="./php/userLogout.php">Logout</a>
             </li>
           <?php
         }
@@ -126,7 +126,7 @@
                 $menu .= '<option value="' . $row["ID"] . '">' . $row["Name"] . '</option>';
               }
           }
-          echo $menu;  
+          echo $menu;
         ?>
         </select>
         </form>
@@ -278,7 +278,7 @@
               var file = e.target.files[0];
               var reader = new FileReader();
               reader.onload = function (f) {
-                var data = f.target.result;                    
+                var data = f.target.result;
                 fabric.Image.fromURL(data, function (img) {
                   var oImg = img.set({left: 0, top: 0, angle: 0});
                   canvas.add(oImg).renderAll();
@@ -298,7 +298,7 @@
               var file = e.target.files[0];
               var reader = new FileReader();
               reader.onload = function (f) {
-                var data = f.target.result;                    
+                var data = f.target.result;
                 fabric.Image.fromURL(data, function (oImg) {
                   scaleCanvasSizeAndBackgroundImage(oImg);
                   canvas.setBackgroundImage(oImg).renderAll();
@@ -422,21 +422,22 @@
 
 
 <img class="yoshi" src="assets/shib.png" style="display:none;" alt=""/>
+
 <script type="text/javascript">
-  if ( window.addEventListener ) {  
-    var state = 0, konami = [38,38,40,40,37,39,37,39,66,65];  
-    window.addEventListener("keydown", function(e) {  
-      if ( e.keyCode == konami[state] ) state++;  
-      else state = 0;  
+  if ( window.addEventListener ) {
+    var state = 0, konami = [38,38,40,40,37,39,37,39,66,65];
+    window.addEventListener("keydown", function(e) {
+      if ( e.keyCode == konami[state] ) state++;
+      else state = 0;
       if ( state == 10 ) {
         $(".yoshi").css("display","inline");
         $(".yoshi").css("position","absolute");
         $(".yoshi").css("bottom","0");
         $(".yoshi").css("right","0");
         $(".yoshi").fadeOut(4000);
-      }  
-      }, true);  
-  }  
+      }
+      }, true);
+  }
 </script>
 
 <script>

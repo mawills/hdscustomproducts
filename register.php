@@ -20,7 +20,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="http://http://192.168.1.118:8080/HDS/index.php#">
+        <a class="navbar-brand" href="./index.php#">
           Image Canvas Demo
         </a>
       </div>
@@ -60,7 +60,7 @@
                    </form>
                   </div>
                   <div class="bottom text-center">
-                    Don't have an account? <a href="http://192.168.1.118:8080/HDS/register.php"><b>Create one.</b></a>
+                    Don't have an account? <a href="./register.php"><b>Create one.</b></a>
                   </div>
                </div>
               </li>
@@ -71,7 +71,7 @@
           else {
             ?>
               <li>
-                <a href="http://192.168.1.118:8080/HDS/php/userLogout.php">Logout</a>
+                <a href="./php/userLogout.php">Logout</a>
               </li>
             <?php
           }
@@ -126,8 +126,8 @@
           echo "<p>Your account was successfully created. Please <a href=\"index.php\">click here to return.</a></p>";
         } else {
           echo "<h1>Error</h1>";
-          echo "<p>Sorry, your registration failed. Please go back and try again.</p>";    
-        }       
+          echo "<p>Sorry, your registration failed. Please go back and try again.</p>";
+        }
       }
     } else {
       ?>
