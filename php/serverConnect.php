@@ -4,7 +4,7 @@ session_start();
 $dbhost = "127.0.0.1";
 $dbuser = "root";
 $dbpass = "";
-$dbname = "hds_custom_products";
+$dbname = "image_canvas_database";
 
 $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 if (!$conn) {
